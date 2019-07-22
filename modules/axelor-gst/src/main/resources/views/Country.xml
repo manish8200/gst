@@ -7,9 +7,9 @@
   </grid>
   
   <form model="com.axelor.gst.db.Country" title="Country" name="country-form">
- 
+ <panel title="Country">
   <field name="name"/>
- 
+ </panel>
   </form>
   
   </object-views>

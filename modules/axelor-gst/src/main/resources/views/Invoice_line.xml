@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+<grid model="com.axelor.gst.db.Invoice_line" title="Invoice_lines" name="iline-grid">
+<field name="products"/>
+<field name="HSBN"/>
+<field name="item"/>
+<field name="price"/>
+<field name="net_amount"/>
+<field name="gst_ratte"/>
+<field name="IGST"/>
+<field name="SGST"/>
+<field name="CGST"/>
+<field name="gross_amount"/>
+
+</grid>
+
+<form model="com.axelor.gst.db.Invoice_line" title="Invoice_line" name="iline-form"  onNew="copyGst">
+<panel title="Invoice_line">
+<field name="products"/>
+<field name="HSBN"/>
+<field name="item"/>
+<field name="price"/>
+<field name="net_amount"/>
+<field name="gst_ratte"  />
+<field name="IGST"/>
+<field name="SGST"/>
+<field name="CGST"/>
+<field name="gross_amount"/>
+</panel>
+</form>
+
+<action-method name="act.gst">
+<call class="com.axelor.gst.db.web.GstController" method="copyGst"/>
+</action-method>
+  </object-views>

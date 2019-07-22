@@ -5,7 +5,7 @@
   
   <module package="com.axelor.gst.db" name="gst"/>
   <entity name="City" cacheable="true">
-  <string name="name" required="true"/>
+  <string name="name" namecolumn="true" required="true"/>
   <many-to-one name="state"	 ref="State" required="true"/>
   <many-to-one name="country" ref="Country" required="true"/>
   </entity>

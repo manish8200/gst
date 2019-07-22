@@ -20,9 +20,10 @@
  <option value="others">Others</option>
  </selection>
  
- <form model="com.axelor.gst.db.Address" title="Addresss" name="address-form">
+ <form model="com.axelor.gst.db.Address" title="Addresss" name="address-form"  onSave="act.address">
 <panel title="Address">
  <field name="type" selection="address.type" />
+ <field name="full_addresss"/>
  <field name="line1"/>
  <field name="line2"/>
  <field name="city"/>
@@ -31,5 +32,9 @@
  <field name="pincode"/>
  </panel>
  </form>
+ 
+ <action-record name="act.address" model="com.axelor.gst.db.Address">
+ <field name="full_addresss" expr="eval : __this__.city"/>
+ </action-record>
  
  </object-views>

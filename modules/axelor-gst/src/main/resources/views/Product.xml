@@ -19,7 +19,7 @@
   <field name="name"/>
  <field name="code"/>
  <field name="HSBN"/>
- <field name="category"  onChange="change-product-category"/>
+ <field name="category"  onChange="act-gst"/>
  <field name="sale_price"/>
  <field name="cost_price"/>
  <field name="image"  widget="Image"/>
@@ -31,5 +31,16 @@
  <action-record name="change-product-category" model="com.axelor.gst.db.Product">
  <field name="gst_rate" expr="eval: category.gst_rate"/>
  </action-record>
+ 
+ <action-condition name="control-gst">
+ <check field="gst_rate" if=" category == null " error="GSt_rate is null"/>
+ </action-condition>
+ 
+ <action-group name="act-gst">
+ <action name="change-product-category"/>
+ <action name="control-gst"/>
+ </action-group>
+ 
  </object-views>
+ 
  
