@@ -2,21 +2,19 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
   http://axelor.com/xml/ns/domain-models/domain-models_5.1.xsd">
-
-<module package="com.axelor.gst.db" name="gst"/>
-<entity name="Invoice_line" cacheable="true">
-<many-to-one name="product" ref="Product"/>
-<string name="HSBN" />
-<string name="item" required="true"/>
-<integer name="qty" />
-<decimal name="price"/>
-<decimal name="net_amount" readonly="true"/>
-<decimal name="gst_rate" readonly="true"/>
-<decimal name="IGST" readonly="true"/>
-<decimal name="SGST" readonly="true"/>
-<decimal name="CGST" readonly="true"/>
-<decimal name="gross_amount" readonly="true"/>
-<one-to-many name="invoice" ref="Invoice"/>
-</entity>  
+  
+  <module package="com.axelor.gst.db" name="gst"/>
+  <entity name="Invoice_line" cacheable="true" >
+  <many-to-one name="products" ref="Product"/>
+  <string name="HSBN" required="true" />
+  <string name="item" required="true"/>
+  <decimal name="price" />
+  <decimal name="net_amount" readonly="true"/>
+  <decimal name="gst_ratte" readonly="true"/>
+  <decimal name="IGST" readonly="true"/>
+  <decimal name="SGST" readonly="true"/>
+  <decimal name="CGST" readonly="true"/>
+  <decimal name="gross_amount" readonly="true"/>  
+  </entity>
   
   </domain-models>

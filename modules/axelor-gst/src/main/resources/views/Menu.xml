@@ -48,6 +48,20 @@
 <view type="form"  name="pcategory-form"/>
 </action-view>
 
+<menuitem title="Invoice" name="menu-invoice"/>
+
+<menuitem title="Create Invoice" name="menu-create-invoice" action="create.all" parent="menu-invoice"/>
+<action-view name="create.all" title="create Invoice" model="com.axelor.gst.db.Invoice">
+<view type="form" name="invoice-form" />
+</action-view>
+
+<menuitem title="Draft_invoice" name="menu-draft" parent="menu-invoice" action="draft.all"/>
+<action-view name="draft.all" title="draft invoice" model="com.axelor.gst.db.Invoice">
+<view type="grid" name="invoice-grid"/>
+<view type="form" name="invoice-form" />
+
+</action-view>
+
   <menuitem title="Configuration" name="menu-configuation" parent="menu-party"/>
 	
 	<menuitem title="All Address" name="menu-address" action="address.all" parent="menu-configuation"/>

@@ -16,8 +16,9 @@
   <panel title="Company OverView" itemSpan="6">
   <field name="logo" widget="Image" />
   <field name="name" required="true"/>
-  <field name="contact" widget="Editor"/>
-  <field name="GSTIN" min="15" max="15"/>
+  <field name="contact"/>
+  
+  <field name="GSTIN"  min="15" max="15"/>
   <field name="bank_details"/>
   <field name="address"/>
   </panel>

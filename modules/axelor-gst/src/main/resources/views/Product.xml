@@ -14,25 +14,22 @@
  <field name="gst_rate"/> 
  </grid>
  
- <form model="com.axelor.gst.db.Product" title="Product" name="product-form" css="panel-blue">
+ <form model="com.axelor.gst.db.Product" title="Product" name="product-form" css="panel-blue"   > 
  <panel title="Product Details">
   <field name="name"/>
  <field name="code"/>
  <field name="HSBN"/>
- <field name="category"/>
+ <field name="category"  onChange="change-product-category"/>
  <field name="sale_price"/>
  <field name="cost_price"/>
  <field name="image"  widget="Image"/>
  <field name="gst_rate"/> 
- 
- 
  </panel>
  
  </form>
  
-<action-attrs name="change-gst">
-<attribute name="" for="" expr=""/>
-</action-attrs>
- 
+ <action-record name="change-product-category" model="com.axelor.gst.db.Product">
+ <field name="gst_rate" expr="eval: category.gst_rate"/>
+ </action-record>
  </object-views>
  

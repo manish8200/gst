@@ -5,22 +5,25 @@
 
 <module package="com.axelor.gst.db" name="gst"/>
 <entity name="Invoice" cacheable="true" >
-<string name="status"  readonly="true"/>
-<many-to-one name="company" ref="Company" required="true" default="Company"></many-to-one>
-<string name="reference" />
+<string name="status" readonly="true" selection="status-selections"/>
+<many-to-one name="companies" ref="Company" required="true" default="company"/>
+<string name="reference" readonly="true"/>
 <datetime name="dates" />
 <integer name="priority"/>
-<many-to-one name="party" ref="Party" required="true"/>
-<many-to-one name="party_contact" ref="Contact"/>
-<many-to-one name="invoice_address" ref="Address"  required="true" ></many-to-one>
-<many-to-one name="shipping_address" ref="Address" />
-<boolean name="use_invoice_address"/>
-<decimal name="net_amount" readonly="true" />
-<decimal name="net_IGST" readonly="true"/>
-<decimal name="net_CSGT" readonly="true"/>
-<decimal name="net_SGST" readonly="true"/>
-<decimal name="gross_amount"/>
+<many-to-one name="partys" ref="Party" required="true"/>
+<many-to-one name="party_contact" ref="Contact" required="true"/>
+<many-to-one name="invoice_address" ref="Address"/>
+<many-to-one name="shipping_address" ref="Address"/>
+<boolean name="use_invoice_address" />
+<decimal name="net_amount" readonly="true" hidden="false"/>
+<decimal name="net_IGST" readonly="true" hidden="false"/>
+<decimal name="net_CSGT" readonly="true" hidden="false"/>
+<decimal name="net_SGST" readonly="true" hidden="false"/>
+<decimal name="gross_amount" readonly="true" hidden="false"/>
+<one-to-many name="invoice_items" ref="Invoice_line"/>
+
 </entity>
+
   
   
   </domain-models>
