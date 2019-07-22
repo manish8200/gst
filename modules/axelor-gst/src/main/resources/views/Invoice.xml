@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+ 
+ <grid model="com.axelor.gst.db.Invoice" title="Invoices" name="invoice-grid">
+ <field name="status"/>
+ <field name="company"/>
+ <field name="reference"/>
+ <field name="dates"/>
+ <field name="priority"/>
+ <field name="party"/>
+ <field name="party_contact"/>
+ <field name="invoice_address"/>
+ <field name="shipping_address"/>
+ <field name="use_invoice_address"/>
+ <field name="net_amount"/>
+ <field name="net_IGST"/>
+ <field name="net_CSGT"/>
+ <field name="net_SGST"/>
+ <field name="gross_amount"/>
+ <field name="invoice_items"/>
+ </grid>
+  
+  <selection name="check.status">
+  <option value="draft">Draft</option>
+  <option value="validate">Validated</option>
+  <option value="paid">Paid</option>
+  <option value="cancelled">Cancelled</option>
+  </selection>
+  
+  <form model="com.axelor.gst.db.Invoice" title="Invoice" name="invoice-form">
+  <panel titel="Invoice" colSpan="8" >
+  <field name="status"/>
+ <field name="company"/>
+ <field name="reference"/>
+ <field name="dates"/>
+ <field name="priority"/>
+  </panel>
+  <panel>
+  <field name="party"/>
+ <field name="party_contact"/>
+ <field name="invoice_address"/>
+ <field name="shipping_address"/>
+  </panel>
+  
+  <panel title="Invoice_data" colSpan="10">
+  <field name="use_invoice_address"/>
+ <field name="net_amount"/>
+ <field name="net_IGST"/>
+ <field name="net_CSGT"/>
+ <field name="net_SGST"/>
+ <field name="gross_amount"/>
+ <field name="invoice_items"/>
+  </panel>
+  </form>
+  
+  </object-views>
