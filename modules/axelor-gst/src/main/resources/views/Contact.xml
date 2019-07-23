@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
- 
-  <grid model="com.axelor.gst.db.Contact" title="Contacts" name="contact-grid">
-  <field name="name"/>
-  <field name="type" />
-  <field name="primary_Email"/>
-  <field name="secondary_Email"/>
-  <field name="primary_Phone"/>
-  <field name="secondary_Phone"/>
-  </grid>
-  
-  <selection name="contact.type">
-  <option value="primary">Primary</option>
-  <option value="secondary">Secondary</option>
-  <option value="others">Others</option>
-  </selection>
-  
-  <form model="com.axelor.gst.db.Contact" title="Contact" name="contact-form">
-  <panel title="Contact Details" >
-   <field name="name"  />
-  <field name="type" selection="contact.type" />
-  <field name="primary_Email"/>
-  <field name="secondary_Email"/>
-  <field name="primary_Phone"/>
-  <field name="secondary_Phone"/>
-  </panel>
-  
-  </form>
-  </object-views>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+	<grid model="com.axelor.gst.db.Contact" title="Contacts"
+		name="contact-grid">
+		<field name="name" />
+		<field name="type" />
+		<field name="primary_Email" />
+		<field name="secondary_Email" />
+		<field name="primary_Phone" />
+		<field name="secondary_Phone" />
+	</grid>
+
+	<selection name="contact.type">
+		<option value="primary">Primary</option>
+		<option value="secondary">Secondary</option>
+		<option value="others">Others</option>
+	</selection>
+
+	<form model="com.axelor.gst.db.Contact" title="Contact"
+		name="contact-form">
+		<panel title="Contact Details">
+			<field name="name" />
+			<field name="type" selection="contact.type" />
+			<field name="primary_Email" />
+			<field name="secondary_Email" />
+			<field name="primary_Phone" />
+			<field name="secondary_Phone" />
+		</panel>
+
+	</form>
+</object-views>

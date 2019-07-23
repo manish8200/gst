@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
- 
- <grid model="com.axelor.gst.db.Product_Category" title="P_Categories" name="pcategory-grid">
- <field name="name"/>
- <field name="code"/>
- <field name="gst_rate"/>
- </grid>
- 
- <form model="com.axelor.gst.db.Product_Category" title="P_Category" name="pcategory-form">
- <panel title="Product Category">
- <field name="name"/>
- <field name="code"/>
- <field name="gst_rate"/>
-  </panel>
- </form>
- 
- </object-views>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+	<grid model="com.axelor.gst.db.Product_Category"
+		title="P_Categories" name="pcategory-grid">
+		<field name="name" />
+		<field name="code" />
+		<field name="gst_rate" />
+	</grid>
+
+	<form model="com.axelor.gst.db.Product_Category"
+		title="P_Category" name="pcategory-form">
+		<panel title="Product Category">
+			<field name="name" />
+			<field name="code" />
+			<field name="gst_rate" />
+		</panel>
+	</form>
+
+</object-views>

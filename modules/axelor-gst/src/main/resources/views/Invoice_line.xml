@@ -1,38 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
 
-<grid model="com.axelor.gst.db.Invoice_line" title="Invoice_lines" name="iline-grid">
-<field name="products"/>
-<field name="HSBN"/>
-<field name="item"/>
-<field name="price"/>
-<field name="net_amount"/>
-<field name="gst_ratte"/>
-<field name="IGST"/>
-<field name="SGST"/>
-<field name="CGST"/>
-<field name="gross_amount"/>
+	<grid model="com.axelor.gst.db.Invoice_line" title="Invoice_lines"
+		name="iline-grid">
+		<field name="products" />
+		<field name="HSBN" />
+		<field name="item" />
+		<field name="qty" />
+		<field name="price" />
+		<field name="net_amount" />
+		<field name="gst_ratte" />
+		<field name="IGST" />
+		<field name="SGST" />
+		<field name="CGST" />
+		<field name="gross_amount" />
 
-</grid>
+	</grid>
 
-<form model="com.axelor.gst.db.Invoice_line" title="Invoice_line" name="iline-form"  onNew="copyGst">
-<panel title="Invoice_line">
-<field name="products"/>
-<field name="HSBN"/>
-<field name="item"/>
-<field name="price"/>
-<field name="net_amount"/>
-<field name="gst_ratte"  />
-<field name="IGST"/>
-<field name="SGST"/>
-<field name="CGST"/>
-<field name="gross_amount"/>
-</panel>
-</form>
+	<form model="com.axelor.gst.db.Invoice_line" title="Invoice_line"
+		name="iline-form" onSave="product-validate">
+		<panel title="Invoice_line">
+			<field name="products" onChange="set-item" />
+			<field name="HSBN" />
+			<field name="item" />
+			<field name="qty" onChange="check-gst" />
+			<field name="price" onChange="check-gst" />
+			<field name="net_amount" />
+			<field name="gst_ratte" />
+			<field name="IGST" />
+			<field name="SGST" />
+			<field name="CGST" />
+			<field name="gross_amount" />
+		</panel>
+	</form>
 
-<action-method name="act.gst">
-<call class="com.axelor.gst.db.web.GstController" method="copyGst"/>
-</action-method>
-  </object-views>
+	<action-validate name="product-validate">
+		<error message="Product is empty." if="products == null" />
+	</action-validate>
+
+
+	<action-method name="set-item">
+		<call class="com.axelor.gst.db.web.GstController"
+			method="setitem" />
+	</action-method>
+
+	<action-method name="set-GST">
+		<call class="com.axelor.gst.db.web.GstController"
+			method="setNetAmount" />
+	</action-method>
+
+	<action-method name="set-sgst">
+		<call class="com.axelor.gst.db.web.GstController"
+			method="setSgst" />
+	</action-method>
+
+	<action-group name="check-gst">
+		<action name="set-GST" />
+		<action name="set-sgst" />
+	</action-group>
+
+
+</object-views> 

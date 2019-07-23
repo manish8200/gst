@@ -1,20 +1,21 @@
-<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
   http://axelor.com/xml/ns/domain-models/domain-models_5.1.xsd">
 
-<module package="com.axelor.gst.db" name="gst"/>
+	<module package="com.axelor.gst.db" name="gst" />
 
-<entity name="Company"  cacheable="true">
+	<entity name="Company" cacheable="true">
 
-<string name="name" required="true"/>
-<many-to-one name="logo" ref="com.axelor.meta.db.MetaFile"/>
+		<string name="name" namecolumn="true" required="true" />
+		<many-to-one name="logo" ref="com.axelor.meta.db.MetaFile" />
 
-<one-to-many name="contact" ref="Contact"/>
-<string name="GSTIN"  />
-<one-to-many name="bank_details" ref="BankAccount"/>
-<many-to-one name="address" ref="Address"></many-to-one>
-</entity>
+		<one-to-many name="contact" ref="Contact" />
+		<string name="GSTIN" />
+		<one-to-many name="bank_details" ref="BankAccount" />
+		<many-to-one name="address" ref="Address"></many-to-one>
+	</entity>
 
 
 </domain-models>

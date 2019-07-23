@@ -1,18 +1,19 @@
-<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
   http://axelor.com/xml/ns/domain-models/domain-models_5.1.xsd">
-  
-  <module package="com.axelor.gst.db" name="gst"/>
-  <entity name="Party" cacheable="true">
-  <string name="referenece" readonly="true" default=""/>
-  <string name="name" required="true"/>
-  <string name="type"  default="Company" required="true"/>
-  <boolean name="customer"/>
-  <boolean name="supplier"/>
-  <string name="GSTIN" min="15" max="15"/>
-  <one-to-many name="contact" ref="Contact" />
-  <one-to-many name="address" ref="Address"/>
-  
-  </entity>
-  </domain-models>
+
+	<module package="com.axelor.gst.db" name="gst" />
+	<entity name="Party" cacheable="true">
+		<string name="referenece" readonly="true" default="" />
+		<string name="name" required="true" />
+		<string name="type" default="Company" required="true" />
+		<boolean name="customer" />
+		<boolean name="supplier" />
+		<string name="GSTIN" min="15" max="15" />
+		<one-to-many name="contact" ref="Contact" />
+		<one-to-many name="address" ref="Address" />
+
+	</entity>
+</domain-models>

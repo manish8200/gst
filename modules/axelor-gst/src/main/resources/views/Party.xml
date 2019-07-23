@@ -1,71 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
-  
-  <selection name="addresss.type">
- <option value="default">Default</option>
- <option value="invoice">Invoice</option>
- <option value="shipping">Shipping</option>
- <option value="others">Others</option>
- </selection>
- 
-  <grid model="com.axelor.gst.db.Party" title="Parties" name="party-grid">
-  <field name="referenece"/>
-  <field name="name"/>
-  <field name="type"/>
-  <field name="customer"/>
-  <field name="supplier"/>
-  <field name="GSTIN"/>
-  <field name="contact"/>
-  <field name="address"/>
-  </grid>
-  
-  <selection name="party.type">
-  <option value="Individual">Individual</option>
-<option value="Company">Company</option>
-  </selection>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
 
-  <selection name="contacts.type">
-  <option value="primary">Primary</option>
-  <option value="secondary">Secondary</option>
-  <option value="others">Others</option>
-  </selection>
-  
-  <form model="com.axelor.gst.db.Party" title="Party" name="party-form" width="large">
-  <panel title="Party Details" >
-    <field name="referenece"/>
-  <field name="name"  />
-  <field name="type"  selection="party.type"/>
-  <field name="customer" />
-  <field name="supplier" />
-  <field name="GSTIN"/>
-  </panel>
-  <panel>
-  <field name="contact"  css="panel-red">
-  <editor layout="table"  x-show-titles="false">
-   <field name="name" />
-  <field name="type" selection="contacts.type" />
-  <field name="primary_Email" />
-  <field name="secondary_Email" />
-  <field name="primary_Phone" />
-  <field name="secondary_Phone" />
-  </editor>
-  </field>
-  <panel>
-  <field name="address" css="panel-blue" >
-  <editor layout="table" x-show-titles="false">
-		 <field name="type" selection="addresss.type"   colSpan="3"/>
-		 <field name="line1" colSpan="4" />
-		 <field name="line2" colSpan="4" />
-		 <field name="city" colSpan="5"/>
-		 <field name="state" colSpan="4" />
-		 <field name="country" colSpan="5" />
-		 <field name="pincode" colSpan="4" />
-  </editor>
-  </field>
-  </panel>
-</panel>
-</form>	
-  
-  </object-views>
+	<selection name="addresss.type">
+		<option value="default">Default</option>
+		<option value="invoice">Invoice</option>
+		<option value="shipping">Shipping</option>
+		<option value="others">Others</option>
+	</selection>
+
+	<grid model="com.axelor.gst.db.Party" title="Parties"
+		name="party-grid">
+		<field name="referenece" />
+		<field name="name" />
+		<field name="type" />
+		<field name="customer" />
+		<field name="supplier" />
+		<field name="GSTIN" />
+		<field name="contact" />
+		<field name="address" />
+	</grid>
+
+	<selection name="party.type">
+		<option value="Individual">Individual</option>
+		<option value="Company">Company</option>
+	</selection>
+
+	<selection name="contacts.type">
+		<option value="primary">Primary</option>
+		<option value="secondary">Secondary</option>
+		<option value="others">Others</option>
+	</selection>
+
+	<form model="com.axelor.gst.db.Party" title="Party"
+		name="party-form" width="large">
+		<panel title="Party Details">
+			<field name="referenece" />
+			<field name="name" />
+			<field name="type" selection="party.type" />
+			<field name="customer" />
+			<field name="supplier" />
+			<field name="GSTIN" />
+		</panel>
+		<panel>
+			<field name="contact" css="panel-red">
+				<editor layout="table" x-show-titles="false">
+					<field name="name" colSpan="5" />
+					<field name="type" selection="contacts.type" colSpan="5" />
+					<field name="primary_Email" colSpan="5" />
+					<field name="secondary_Email" colSpan="5" />
+					<field name="primary_Phone" colSpan="5" />
+					<field name="secondary_Phone" colSpan="5" />
+				</editor>
+			</field>
+			<panel>
+				<field name="address" css="panel-blue">
+					<editor layout="table" x-show-titles="false">
+						<field name="type" selection="addresss.type" colSpan="3" />
+						<field name="line1" colSpan="4" />
+						<field name="line2" colSpan="4" />
+						<field name="city" colSpan="5" />
+						<field name="state" colSpan="4" />
+						<field name="country" colSpan="5" />
+						<field name="pincode" colSpan="4" />
+					</editor>
+				</field>
+			</panel>
+		</panel>
+	</form>
+
+</object-views>

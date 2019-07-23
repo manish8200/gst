@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
- 
- <grid model="com.axelor.gst.db.Address" title="Addresses" name="address-grid">
- <field name="type"/>
- <field name="line1"/>
- <field name="line2"/>
- <field name="city"/>
- <field name="state"/>
- <field name="country"/>
- <field name="pincode"/>
- </grid>
- 
- <selection name="address.type">
- <option value="default">Default</option>
- <option value="invoice">Invoice</option>
- <option value="shipping">Shipping</option>
- <option value="others">Others</option>
- </selection>
- 
- <form model="com.axelor.gst.db.Address" title="Addresss" name="address-form"  onSave="act.address">
-<panel title="Address">
- <field name="type" selection="address.type" />
- <field name="full_addresss"/>
- <field name="line1"/>
- <field name="line2"/>
- <field name="city"/>
- <field name="state"/>
- <field name="country"/>
- <field name="pincode"/>
- </panel>
- </form>
- 
- <action-record name="act.address" model="com.axelor.gst.db.Address">
- <field name="full_addresss" expr="eval : __this__.city"/>
- </action-record>
- 
- </object-views>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+	<grid model="com.axelor.gst.db.Address" title="Addresses"
+		name="address-grid">
+		<field name="type" />
+		<field name="line1" />
+		<field name="line2" />
+		<field name="city" />
+		<field name="state" />
+		<field name="country" />
+		<field name="pincode" />
+	</grid>
+
+	<selection name="address.type">
+		<option value="default">Default</option>
+		<option value="invoice">Invoice</option>
+		<option value="shipping">Shipping</option>
+		<option value="others">Others</option>
+	</selection>
+
+	<form model="com.axelor.gst.db.Address" title="Addresss"
+		name="address-form" onSave="address-validation">
+		<panel title="Address">
+			<field name="type" selection="address.type" />
+			<field name="full_addresss" onChange="set-fulladdress" />
+			<field name="line1" />
+			<field name="line2" />
+			<field name="city" />
+			<field name="state" />
+			<field name="country" />
+			<field name="pincode" />
+		</panel>
+	</form>
+
+	<action-method name="set-fulladdress">
+		<call class="com.axelor.gst.db.web.GstController"
+			method="setaddress" />
+	</action-method>
+
+	<action-validate name="address-validation">
+		<error message="fullAddress is null " if="full_addresss == null" />
+	</action-validate>
+
+</object-views>

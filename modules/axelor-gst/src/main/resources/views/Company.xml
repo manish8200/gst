@@ -1,30 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
-  
-  <grid model="com.axelor.gst.db.Company" title="Companies" name="company-grid">
-  <field name="name" required="true"/>
-  <field name="logo" widget="Image"/>
-  <field name="contact" widget="Editor"/>
-  <field name="GSTIN" min="15" max="15" />
-  <field name="bank_details"/>
-  <field name="address"/>
-  </grid>
-  
-  <form model="com.axelor.gst.db.Company" title="Company" name="company-form">
-  <panel title="Company OverView" itemSpan="6">
-  <field name="logo" widget="Image" />
-  <field name="name" required="true"/>
-  <field name="contact"/>
-  
-  <field name="GSTIN"  min="15" max="15"/>
-  <field name="bank_details"/>
-  <field name="address"/>
-  </panel>
-  
-  
-  </form>
-  
-  
-  </object-views>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+	<grid model="com.axelor.gst.db.Company" title="Companies"
+		name="company-grid">
+		<field name="name" required="true" />
+		<field name="logo" widget="Image" />
+		<field name="contact" widget="Editor" />
+		<field name="GSTIN" min="15" max="15" />
+		<field name="bank_details" />
+		<field name="address" />
+	</grid>
+
+
+
+	<selection name="contacts.type">
+		<option value="primary">Primary</option>
+		<option value="secondary">Secondary</option>
+		<option value="others">Others</option>
+	</selection>
+
+	<form model="com.axelor.gst.db.Company" title="Company"
+		name="company-form">
+		<panel title="Company OverView" itemSpan="6">
+			<field name="logo" widget="Image" />
+			<field name="name" required="true" />
+			<field name="contact" colSpan="12">
+				<editor layout="table">
+					<field name="name" />
+					<field name="type" selection="contacts.type" />
+					<field name="primary_Email" />
+					<field name="secondary_Email" />
+					<field name="primary_Phone" />
+					<field name="secondary_Phone" />
+				</editor>
+
+			</field>
+
+			<field name="GSTIN" />
+			<field name="bank_details" colSpan="12" />
+			<field name="address" />
+		</panel>
+
+
+	</form>
+
+
+</object-views>
