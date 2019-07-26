@@ -48,16 +48,17 @@
 				<editor layout="table" x-show-titles="false">
 					<field name="name" colSpan="5" />
 					<field name="type" selection="contacts.type" colSpan="5" />
-					<field name="primary_Email" colSpan="5" />
-					<field name="secondary_Email" colSpan="5" />
-					<field name="primary_Phone" colSpan="5" />
-					<field name="secondary_Phone" colSpan="5" />
+					<field name="primaryEmail" colSpan="5" />
+					<field name="secondaryEmail" colSpan="5" />
+					<field name="primaryPhone" colSpan="5" />
+					<field name="secondaryPhone" colSpan="5" />
 				</editor>
 			</field>
 			<panel>
 				<field name="address" css="panel-blue">
 					<editor layout="table" x-show-titles="false">
-						<field name="type" selection="addresss.type" colSpan="3" />
+						<field name="type" selection="addresss.type" colSpan="3"  />
+						<field name="fullAddresss" colSpan="4" onChange="set-fulladdress" />
 						<field name="line1" colSpan="4" />
 						<field name="line2" colSpan="4" />
 						<field name="city" colSpan="5" />
@@ -69,5 +70,10 @@
 			</panel>
 		</panel>
 	</form>
+
+	<action-method name="set-fulladdress">
+		<call class="com.axelor.gst.db.web.GstController"
+			method="setaddress" />
+	</action-method>
 
 </object-views>

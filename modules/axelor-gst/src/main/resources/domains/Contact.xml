@@ -8,10 +8,10 @@
 	<entity name="Contact">
 		<string name="name" required="true" />
 		<string name="type" required="true" />
-		<string name="primary_Email" />
-		<string name="secondary_Email" />
-		<string name="primary_Phone" />
-		<string name="secondary_Phone" />
+		<string name="primaryEmail" />
+		<string name="secondaryEmail" />
+		<string name="primaryPhone" />
+		<string name="secondaryPhone" />
 
 
 	</entity>

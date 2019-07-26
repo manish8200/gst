@@ -13,7 +13,7 @@
 
 		<one-to-many name="contact" ref="Contact" />
 		<string name="GSTIN" />
-		<one-to-many name="bank_details" ref="BankAccount" />
+		<one-to-many name="bankDetails" ref="BankAccount" />
 		<many-to-one name="address" ref="Address"></many-to-one>
 	</entity>
 

@@ -4,10 +4,10 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
 
 	<grid model="com.axelor.gst.db.Product_Category"
-		title="P_Categories" name="pcategory-grid">
+		title="Product Categories" name="pcategory-grid">
 		<field name="name" />
 		<field name="code" />
-		<field name="gst_rate" />
+		<field name="gstRate" />
 	</grid>
 
 	<form model="com.axelor.gst.db.Product_Category"
@@ -15,7 +15,7 @@
 		<panel title="Product Category">
 			<field name="name" />
 			<field name="code" />
-			<field name="gst_rate" />
+			<field name="gstRate" />
 		</panel>
 	</form>
 

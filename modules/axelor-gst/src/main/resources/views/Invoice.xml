@@ -16,52 +16,52 @@
 		<field name="status" />
 		<field name="companies" />
 		<field name="reference" />
-		<field name="dates" />
+		<field name="invoiceDateT" />
 		<field name="priority" />
 		<field name="partys" />
-		<field name="party_contact" />
-		<field name="invoice_address" />
-		<field name="shipping_address" />
-		<field name="use_invoice_address" />
-		<field name="net_amount" />
-		<field name="net_IGST" />
-		<field name="net_CSGT" />
-		<field name="net_SGST" />
-		<field name="gross_amount" />
-		<field name="invoice_items" />
+		<field name="partyContact" />
+		<field name="invoiceAddress" />
+		<field name="shippingAddress" />
+		<field name="useInvoiceAddressAsShipping" />
+		<field name="netAmount" />
+		<field name="netIGST" />
+		<field name="netCSGT" />
+		<field name="netSGST" />
+		<field name="grossAmount" />
+		<field name="invoiceItems" />
 	</grid>
 
 	<form model="com.axelor.gst.db.Invoice" title="Invoice"
 		name="invoice-form" onNew="date-set">
 		<panel title="Invoice" css="panel-red">
-			<field name="status" selection="status-selection" />
-			<button-group>
+			<field name="status" selection="status-selection" widget="NavSelect" colSpan="8"/>
+<!-- 			<button-group>
 				<button name="Draft" title="draft" />
 				<button name="validate" title="Validated" />
 				<button name="paid" title="Paid" />
 				<button name="cancel" title="Cancelled" />
-			</button-group>
+			</button-group> -->
 			<field name="companies" />
 			<field name="reference" />
-			<field name="dates" />
+			<field name="invoiceDateT" />
 			<field name="priority" />
-			<field name="partys" onChange="set-contact" />
-			<field name="party_contact" />
-			<field name="invoice_address" />
-			<field name="shipping_address" />
-			<field name="use_invoice_address" />
-			<field name="net_amount" />
-			<field name="net_IGST" />
-			<field name="net_CSGT" />
-			<field name="net_SGST" />
-			<field name="gross_amount" />
-			<field name="invoice_items" />
+			<field name="party" onChange="set-party" />
+			<field name="partyContact" />
+			<field name="invoiceAddress" />
+			<field name="shippingAddress" />
+			<field name="useInvoiceAddress" onChange="set-useasshipping"/>
+			<field name="netAmount" />
+			<field name="netIGST" />
+			<field name="netCSGT" />
+			<field name="netSGST" />
+			<field name="grossAmount" />
+			<field name="invoiceItems" onChange="set-invoice-amount"/>
 		</panel>
 	</form>
 
 	<action-record name="date-set"
 		model="com.axelor.gst.db.Invoice">
-		<field name="dates" expr="eval: __datetime__" />
+		<field name="invoiceDateT" expr="eval: __datetime__" />
 	</action-record>
 
 	<action-method name="set-contact">
@@ -69,4 +69,33 @@
 			method="setInvoice" />
 	</action-method>
 
+	<action-method name="set-address">
+		<call class="com.axelor.gst.db.web.GstController"
+			method="setInvoiceAddress" />
+	</action-method>
+
+	<action-method name="set-shiping">
+		<call class="com.axelor.gst.db.web.GstController"
+			method="setShippingaddress" />
+	</action-method>
+
+<action-method name="set-useasshipping">
+<call class="com.axelor.gst.db.web.GstController" method="setInvoice_as_shipping"/>
+</action-method>
+
+<action-method name="set-invoice-amount">
+<call class="com.axelor.gst.db.web.GstController" method="setInvoiceAmount"/>
+</action-method>
+
+<action-record name="set-net-amount" model="com.axelor.gst.db.Invoice">
+<field name="netAmount" expr="eval : invoiceItems.netAmount "/>
+</action-record>
+
+	<action-group name="set-party">
+		<action name="set-contact" />
+		<action name="set-address" />
+		<action name="set-shiping" />
+		<action name="set-net-amount"/>
+	</action-group>
+	
 </object-views>

@@ -8,7 +8,7 @@
 	<entity name="Product_Category" cacheable="true">
 		<string name="name" required="true" />
 		<string name="code" required="true" />
-		<decimal name="gst_rate" />
+		<decimal name="gstRate" />
 
 	</entity>
 

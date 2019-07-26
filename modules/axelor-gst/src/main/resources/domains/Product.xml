@@ -9,10 +9,10 @@
 		<string name="code" required="true" />
 		<string name="HSBN" />
 		<many-to-one name="category" ref="Product_Category" />
-		<decimal name="sale_price" />
-		<decimal name="cost_price" />
+		<decimal name="salePrice" />
+		<decimal name="costPrice" />
 		<binary name="image" />
-		<decimal name="gst_rate" />
+		<decimal name="gstRate" />
 	</entity>
 
 

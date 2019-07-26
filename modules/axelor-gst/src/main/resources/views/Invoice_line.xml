@@ -10,29 +10,29 @@
 		<field name="item" />
 		<field name="qty" />
 		<field name="price" />
-		<field name="net_amount" />
-		<field name="gst_ratte" />
+		<field name="netAmount" />
+		<field name="gstRate" />
 		<field name="IGST" />
 		<field name="SGST" />
 		<field name="CGST" />
-		<field name="gross_amount" />
+		<field name="grossAmount" />
 
 	</grid>
 
 	<form model="com.axelor.gst.db.Invoice_line" title="Invoice_line"
-		name="iline-form" onSave="product-validate">
+		name="iline-form" onSave="validate-state">
 		<panel title="Invoice_line">
 			<field name="products" onChange="set-item" />
-			<field name="HSBN" />
+			<field name="HSBN" onChange="validate-state" />
 			<field name="item" />
-			<field name="qty" onChange="check-gst" />
-			<field name="price" onChange="check-gst" />
-			<field name="net_amount" />
-			<field name="gst_ratte" />
+			<field name="qty" onChange="validate-state" />
+			<field name="price" onChange="validate-state" />
+			<field name="netAmount" />
+			<field name="gstRate" />
 			<field name="IGST" />
 			<field name="SGST" />
 			<field name="CGST" />
-			<field name="gross_amount" />
+			<field name="grossAmount" />
 		</panel>
 	</form>
 
@@ -55,8 +55,15 @@
 		<call class="com.axelor.gst.db.web.GstController"
 			method="setSgst" />
 	</action-method>
+	<action-method name="validate-state">
+		<call class="com.axelor.gst.db.web.GstController"
+			method="setValidation" />
+	</action-method>
+
+
 
 	<action-group name="check-gst">
+		<!-- <action name="validate-state"/> -->
 		<action name="set-GST" />
 		<action name="set-sgst" />
 	</action-group>

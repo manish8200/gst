@@ -7,7 +7,7 @@
 	<module package="com.axelor.gst.db" name="gst" />
 	<entity name="Address" cacheable="true">
 		<string name="type" required="true" />
-		<string name="full_addresss" namecolumn="true" />
+		<string name="fullAddresss" namecolumn="true" />
 		<string name="line1" required="true" />
 		<string name="line2" />
 		<many-to-one name="city" ref="City" required="true" />

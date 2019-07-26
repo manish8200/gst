@@ -9,7 +9,7 @@
 		<field name="logo" widget="Image" />
 		<field name="contact" widget="Editor" />
 		<field name="GSTIN" min="15" max="15" />
-		<field name="bank_details" />
+		<field name="bankDetails" />
 		<field name="address" />
 	</grid>
 
@@ -26,25 +26,19 @@
 		<panel title="Company OverView" itemSpan="6">
 			<field name="logo" widget="Image" />
 			<field name="name" required="true" />
-			<field name="contact" colSpan="12">
+			<field name="contact"  colSpan="12">
 				<editor layout="table">
 					<field name="name" />
 					<field name="type" selection="contacts.type" />
-					<field name="primary_Email" />
-					<field name="secondary_Email" />
-					<field name="primary_Phone" />
-					<field name="secondary_Phone" />
+					<field name="primaryEmail" />
+					<field name="secondaryEmail" />
+					<field name="primaryPhone" />
+					<field name="secondaryPhone" />
 				</editor>
-
 			</field>
-
 			<field name="GSTIN" />
-			<field name="bank_details" colSpan="12" />
+			<field name="bankDetails" colSpan="12" />
 			<field name="address" />
 		</panel>
-
-
 	</form>
-
-
 </object-views>

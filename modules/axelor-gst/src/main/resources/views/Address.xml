@@ -25,7 +25,7 @@
 		name="address-form" onSave="address-validation">
 		<panel title="Address">
 			<field name="type" selection="address.type" />
-			<field name="full_addresss" onChange="set-fulladdress" />
+			<field name="fullAddresss" onChange="set-fulladdress" />
 			<field name="line1" />
 			<field name="line2" />
 			<field name="city" />
@@ -41,7 +41,7 @@
 	</action-method>
 
 	<action-validate name="address-validation">
-		<error message="fullAddress is null " if="full_addresss == null" />
+		<error message="fullAddress is null " if="fullAddresss == null" />
 	</action-validate>
 
 </object-views>

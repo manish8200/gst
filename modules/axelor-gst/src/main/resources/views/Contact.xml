@@ -7,10 +7,10 @@
 		name="contact-grid">
 		<field name="name" />
 		<field name="type" />
-		<field name="primary_Email" />
-		<field name="secondary_Email" />
-		<field name="primary_Phone" />
-		<field name="secondary_Phone" />
+		<field name="primaryEmail" />
+		<field name="secondaryEmail" />
+		<field name="primaryPhone" />
+		<field name="secondaryPhone" />
 	</grid>
 
 	<selection name="contact.type">
@@ -24,10 +24,10 @@
 		<panel title="Contact Details">
 			<field name="name" />
 			<field name="type" selection="contact.type" />
-			<field name="primary_Email" />
-			<field name="secondary_Email" />
-			<field name="primary_Phone" />
-			<field name="secondary_Phone" />
+			<field name="primaryEmail" />
+			<field name="secondaryEmail" />
+			<field name="primaryPhone" />
+			<field name="secondaryPhone" />
 		</panel>
 
 	</form>

@@ -4,14 +4,16 @@
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
  
  <grid model="com.axelor.gst.db.Product" title="Products" name="product-grid">
+
  <field name="name"/>
  <field name="code"/>
  <field name="HSBN"/>
  <field name="category"/>
- <field name="sale_price"/>
- <field name="cost_price"/>
+ <field name="salePrice"/>
+ <field name="costPrice"/>
  <field name="image"/>
- <field name="gst_rate"/> 
+ <field name="gstRate"/> 
+  <button name="Create Invoice" title="CreateInvoice" colSpan="4" onClick=""/>
  </grid>
  
  <form model="com.axelor.gst.db.Product" title="Product" name="product-form" css="panel-blue"   > 
@@ -20,20 +22,20 @@
  <field name="code"/>
  <field name="HSBN"/>
  <field name="category"  onChange="act-gst"/>
- <field name="sale_price"/>
- <field name="cost_price"/>
+ <field name="salePrice"/>
+ <field name="costPrice"/>
  <field name="image"  widget="Image"/>
- <field name="gst_rate"/> 
+ <field name="gstRate"/> 
  </panel>
  
  </form>
  
  <action-record name="change-product-category" model="com.axelor.gst.db.Product">
- <field name="gst_rate" expr="eval: category.gst_rate"/>
+ <field name="gstRate" expr="eval: category.gstRate"/>
  </action-record>
  
  <action-condition name="control-gst">
- <check field="gst_rate" if=" category == null " error="GSt_rate is null"/>
+ <check field="gstRate" if=" category == null " error="gst rate is null"/>
  </action-condition>
  
  <action-group name="act-gst">
