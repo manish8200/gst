@@ -4,7 +4,9 @@
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
  
  <grid model="com.axelor.gst.db.Product" title="Products" name="product-grid">
-
+ <toolbar>
+ <button name="Create Product Invoice" title="Create invoice" onClick="set-product-invoice" />
+ </toolbar>
  <field name="name"/>
  <field name="code"/>
  <field name="HSBN"/>
@@ -13,8 +15,18 @@
  <field name="costPrice"/>
  <field name="image"/>
  <field name="gstRate"/> 
-  <button name="Create Invoice" title="CreateInvoice" colSpan="4" onClick=""/>
  </grid>
+ 
+  <action-view name="set-product-invoice" title="create Invoice"
+		model="com.axelor.gst.db.Invoice">
+		<view type="form" name="invoice-form" />
+		<context name="productId" expr="eval: _ids"/>
+	</action-view> 
+ 
+ 	 <action-method name="action-call-invoice-form">
+ <call class="com.axelor.gst.db.web.ProductController" method="setinvoice"/>
+ </action-method>
+ 
  
  <form model="com.axelor.gst.db.Product" title="Product" name="product-form" css="panel-blue"   > 
  <panel title="Product Details">
@@ -38,11 +50,16 @@
  <check field="gstRate" if=" category == null " error="gst rate is null"/>
  </action-condition>
  
+<!--  <action-method name="get-invoice-form">
+ <call class="com.axelor.gst.db.web.GstController" method="printproductinvoice"/>
+ </action-method> -->
+ 
  <action-group name="act-gst">
  <action name="change-product-category"/>
  <action name="control-gst"/>
  </action-group>
  
  </object-views>
+	
  
  

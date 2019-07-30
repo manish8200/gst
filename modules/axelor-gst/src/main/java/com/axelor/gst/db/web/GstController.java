@@ -2,11 +2,13 @@ package com.axelor.gst.db.web;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+
 import com.axelor.db.JpaSupport;
 import com.axelor.gst.db.Address;
 import com.axelor.gst.db.Contact;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.Invoice_line;
+import com.axelor.gst.db.Party;
 import com.axelor.gst.db.Product;
 import com.axelor.gst.db.service.InvoiceService;
 import com.axelor.rpc.ActionRequest;
@@ -14,6 +16,7 @@ import com.axelor.rpc.ActionResponse;
 import com.google.inject.Inject;
 
 public class GstController extends JpaSupport {
+	
 	@Inject
 	InvoiceService inservice;
 
@@ -21,59 +24,41 @@ public class GstController extends JpaSupport {
 
 		Invoice_line inline = rq.getContext().asType(Invoice_line.class);
 		Product product = inline.getProducts();
-		Product product1 = inline.getProducts();
 
-		{
+		
+		if(product != null) {
 			String name;
 			String item;
-
 			String code = new String();
 			code = product.getCode();
 			name = product.getName();
-
 			item = "[" + code + "]" + name;
 			rsp.setValue("item", item);
-		}
 
-		{
-			BigDecimal cgst;
-			cgst = product1.getGstRate();
-
-			rsp.setValue("gstRate", cgst);
+			rsp.setValue("price", product.getCostPrice());
+			rsp.setValue("gstRate", product.getGstRate());
 		}
+		else {
+			rsp.setValue("item", null);
+			rsp.setValue("price", null);
+			rsp.setValue("gstRate", null);
+		}
+		
 	}
 
 	public void setaddress(ActionRequest rq, ActionResponse rsp) {
 
 		Address address = rq.getContext().asType(Address.class);
 
-		String line1, fulladdress;
+		String line1, fulladdress,line2;
 		String state;
 		String city;
 		line1 = address.getLine1();
+		line2 = address.getLine2();
 		city = address.getCity().getName();
 		state = address.getState().getName();
-		fulladdress = line1 + " " + city + " " + state;
+		fulladdress = line1 + line2 + " " + city + " " + state;
 		rsp.setValue("fullAddresss", fulladdress);
-	}
-
-	public void setInvoice(ActionRequest rq, ActionResponse rsp) {
-		Invoice invoice = rq.getContext().asType(Invoice.class);
-		Contact contact = inservice.setcontact(invoice);
-		rsp.setValue("partyContact", contact);
-	}
-
-	public void setInvoiceAddress(ActionRequest rq, ActionResponse rsp) {
-		Invoice invoices = rq.getContext().asType(Invoice.class);
-		Address address = inservice.setaddress(invoices);
-		// System.out.println(address);
-		rsp.setValue("invoiceAddress", address);
-	}
-
-	public void setShippingaddress(ActionRequest rq, ActionResponse rsp) {
-		Invoice invoice = rq.getContext().asType(Invoice.class);
-		Address addresses = inservice.setshipping(invoice);
-		rsp.setValue("shippingAddress", addresses);
 	}
 
 	public void setInvoice_as_shipping(ActionRequest rq, ActionResponse rsp) {
@@ -88,14 +73,15 @@ public class GstController extends JpaSupport {
 		Invoice invoice = rq.getContext().asType(Invoice.class);
 		BigDecimal netamount;
 		BigDecimal netIgst, netCgst, netSgst, grossAmount;
-
+		
 		Collection<Invoice_line> inline = invoice.getInvoiceItems();
 		for (Invoice_line invoice_line : inline) {
 			netamount = invoice_line.getNetAmount();
 			netIgst = invoice_line.getIGST();
 			netCgst = invoice_line.getCGST();
 			netSgst = invoice_line.getSGST();
-			grossAmount = invoice_line.getSGST();
+			grossAmount = invoice_line.getGrossAmount();
+			
 			// System.out.println(netIgst);
 			rsp.setValue("netAmount", netamount);
 			rsp.setValue("netIGST", netIgst);
@@ -117,5 +103,15 @@ public class GstController extends JpaSupport {
 		rsp.setValue("grossAmount", invoice_line.getGrossAmount());
 
 	}
-
+			
+	public void setparty(ActionRequest rq , ActionResponse rsp) {
+		//Party party = rq.getContext().asType(Party.class);
+		Invoice invoice = rq.getContext().asType(Invoice.class);
+		Invoice partyInvoice = inservice.validateParty(invoice);
+		System.out.println(partyInvoice);
+		rsp.setValue("partyContact", partyInvoice.getPartyContact());
+		rsp.setValue("invoiceAddress", partyInvoice.getInvoiceAddress());
+		rsp.setValue("shippingAddress", partyInvoice.getShippingAddress());
+	}
+	
 }

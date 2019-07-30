@@ -58,7 +58,7 @@
 				<field name="address" css="panel-blue">
 					<editor layout="table" x-show-titles="false">
 						<field name="type" selection="addresss.type" colSpan="3"  />
-						<field name="fullAddresss" colSpan="4" onChange="set-fulladdress" />
+						<field name="fullAddresss" colSpan="4" onChange="action-set-fulladdress" />
 						<field name="line1" colSpan="4" />
 						<field name="line2" colSpan="4" />
 						<field name="city" colSpan="5" />
@@ -71,7 +71,8 @@
 		</panel>
 	</form>
 
-	<action-method name="set-fulladdress">
+
+	<action-method name="action-set-fulladdress">
 		<call class="com.axelor.gst.db.web.GstController"
 			method="setaddress" />
 	</action-method>

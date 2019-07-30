@@ -20,7 +20,15 @@
 		<view type="grid" name="bAccount-grid" />
 		<view type="form" name="bAccount-form" />
 	</action-view>
+	
+<menuitem title="All Sequence" name="menu-sequences" parent="menu-company"
+action="sequences.all"/>
+<action-view name="sequences.all" title="Sequencess"
+model="com.axelor.gst.db.Sequence" >
+<view type="grid" name="sequence-grid"/>
+<view type="form" name="sequence-form"/>
 
+</action-view>
 
 
 	<menuitem title="Party" name="menu-party" />

@@ -2,74 +2,20 @@ package com.axelor.gst.db.service;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
+
+import org.apache.poi.xslf.model.geom.AddDivideExpression;
+
 import com.axelor.gst.db.Address;
 import com.axelor.gst.db.Company;
 import com.axelor.gst.db.Contact;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.Invoice_line;
 import com.axelor.gst.db.Party;
+import com.axelor.gst.db.Product;
 import com.axelor.gst.db.State;
 
 public class InvoiceServiceImpl implements InvoiceService {
-
-	@Override
-	public Contact setcontact(Invoice invoice) {
-		// TODO Auto-generated method stub
-
-		Party party = invoice.getParty();
-
-		Collection<Contact> partyContact = party.getContact();
-		Contact contact = null;
-		System.out.println(contact);
-
-		for (Contact contacts : partyContact) {
-			if (contacts.getType().equals("primary")) {
-
-				contact = contacts;
-				// System.out.println(contact);
-			}
-		}
-
-		return contact;
-
-	}
-
-	@Override
-	public Address setaddress(Invoice invoices) {
-		// TODO Auto-generated method stub
-
-		Party party = invoices.getParty();
-
-		Collection<Address> partyAddress = party.getAddress();
-		Address address = null;
-
-		for (Address addresses : partyAddress) {
-			if (addresses.getType().equals("invoice")) {
-
-				address = addresses;
-				// System.out.println(address);
-			}
-		}
-
-		return address;
-	}
-
-	@Override
-	public Address setshipping(Invoice shipping) {
-		// TODO Auto-generated method stub
-		Party party = shipping.getParty();
-
-		Collection<Address> partyAddress = party.getAddress();
-		Address address = null;
-
-		for (Address addresses : partyAddress) {
-			if (addresses.getType().equals("shipping")) {
-				address = addresses;
-				// System.out.println(address);
-			}
-		}
-		return address;
-	}
 
 	@Override
 	public Address setinvoiceasship(Invoice shipping) {
@@ -79,7 +25,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 		Boolean myaddress;
 		myaddress = shipping.getUseInvoiceAddress();
 
-		Collection<Address> partyAddress = party.getAddress();
+		List<Address> partyAddress = party.getAddress();
 
 		Address inaddress;
 		Address useaddress = null;
@@ -99,16 +45,13 @@ public class InvoiceServiceImpl implements InvoiceService {
 		return null;
 	}
 
-	@Override
-	public BigDecimal setvalues(Invoice invoiceLine) {
-		// TODO Auto-generated method stub
-		BigDecimal netamount = invoiceLine.getNetAmount();
-		return netamount;
-	}
-
+	
 	@Override
 	public Invoice_line validateaddress(Invoice invoice, Invoice_line inline) {
 		// TODO Auto-generated method stub
+		Party party = invoice.getParty();
+	
+		if(party != null) {
 		Address addresses = invoice.getInvoiceAddress();
 		State states = addresses.getState();
 		Company company = invoice.getCompanies();
@@ -136,5 +79,68 @@ public class InvoiceServiceImpl implements InvoiceService {
 		inline.setIGST(Igst);
 		inline.setGrossAmount(grossamount);
 		return inline;
+		}
+		else {
+			inline.setNetAmount(null);
+			inline.setSGST(null);
+			inline.setCGST(null);
+			inline.setIGST(null);
+			inline.setGrossAmount(null);
+			
+		}
+		return inline;
+	}
+
+	@Override
+	public Invoice validateParty(Invoice invoice) {
+		// TODO Auto-generated method stub
+		
+		
+		Contact contacts = null;
+		Party party = invoice.getParty();
+		
+		if(party != null) {
+		
+		Collection<Contact>partycontacts = party.getContact();
+		for (Contact contact : partycontacts) {
+			if(contact.getType().equals("primary")) {
+				contacts = contact;
+			}
+		}
+		Address invoiceaddreess = null;
+		Address shippingaddress = null;
+		
+		Collection<Address>partyaddress = party.getAddress();
+		for (Address address : partyaddress) {
+			if(address.getType().equals("invoice")) {
+				invoiceaddreess = address;
+			}if(address.getType().equals("shipping")) {
+				shippingaddress = address;
+			}
+		}
+		invoice.setPartyContact(contacts);
+		invoice.setInvoiceAddress(invoiceaddreess);
+		invoice.setShippingAddress(shippingaddress);
+		return invoice;
+		}
+		else
+		{
+			invoice.setPartyContact(null);
+			invoice.setInvoiceAddress(null);
+			invoice.setShippingAddress(null);
+				return invoice;
+		}
+		
+		
+		}
+
+	@Override
+	public Invoice setinvoiceitem(Invoice invoice) {
+		// TODO Auto-generated method stub
+		List<Invoice_line> inline = invoice.getInvoiceItems();
+		for (Invoice_line invoice_line : inline) {
+			
+		}
+		return null;
 	}
 }
