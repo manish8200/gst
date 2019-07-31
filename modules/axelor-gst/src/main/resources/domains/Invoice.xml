@@ -9,7 +9,7 @@
 		<string name="status" readonly="true" 
 			selection="status-selections"  default="draft"/>
 		<many-to-one name="companies" ref="Company"
-			required="true" default="Company" />
+			required="true" default="Companys" />
 		<string name="reference" readonly="true" />
 		<datetime name="invoiceDateT" />
 		<integer name="priority" />

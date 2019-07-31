@@ -2,12 +2,10 @@ package com.axelor.gst.db.web;
 
 import java.math.BigDecimal;
 import java.util.Collection;
-
-import org.quartz.simpl.ZeroSizeThreadPool;
+import java.util.List;
 
 import com.axelor.db.JpaSupport;
 import com.axelor.gst.db.Address;
-import com.axelor.gst.db.Contact;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.Invoice_line;
 import com.axelor.gst.db.Party;
@@ -39,11 +37,13 @@ public class GstController extends JpaSupport {
 
 			rsp.setValue("price", product.getCostPrice());
 			rsp.setValue("gstRate", product.getGstRate());
+			rsp.setValue("HSBN", product.getHSBN());
 		}
 		else {
 			rsp.setValue("item", null);
 			rsp.setValue("price", null);
 			rsp.setValue("gstRate", null);
+			rsp.setValue("HSBN", null);
 		}
 		
 	}
@@ -114,6 +114,16 @@ public class GstController extends JpaSupport {
 		rsp.setValue("partyContact", partyInvoice.getPartyContact());
 		rsp.setValue("invoiceAddress", partyInvoice.getInvoiceAddress());
 		rsp.setValue("shippingAddress", partyInvoice.getShippingAddress());
+	}
+	public void setvalidationParty(ActionRequest rq, ActionResponse rsp) {
+		Invoice invoice = rq.getContext().asType(Invoice.class);
+		List<Invoice_line> inline = invoice.getInvoiceItems();
+		for (Invoice_line invoice_line : inline) {
+			Invoice_line invoices = inservice.validateaddress(invoice,invoice_line);
+		}
+		rsp.setValues(invoice);
+		
+		
 	}
 	
 }

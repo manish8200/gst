@@ -39,20 +39,19 @@
 				widget="NavSelect" colSpan="8" />
 			<button-group>
 				<button name="Draft" title="Draft"
-					onClick="action-status-draft" hideIf="paid" />
+					onClick="action-status-draft"  hidden="true" showIf=" status == 'validate' " />
 				<button name="validate" title="Validate"
-					onClick="action-status-validate" />
-				<button name="paid" title="Paid" onClick="action-status-paid"
-					hideIf="validate" />
+					onClick="action-status-validate" hidden="true" showIf= " status == 'draft' " />
+				<button name="paid" title="Paid" onClick="action-status-paid" hidden="true" showIf=" status == 'validate' " />
 				<button name="cancel" title="Cancel"
-					onClick="action-status-cancel" hideIf="paid" />
+					onClick="action-status-cancel"  hidden="true" showIf=" status == 'validate' " />
 			</button-group>
 			<field name="companies"
-				onChange="action.invoicce-validate-invoice.item" />
+				onChange="action.invoicce-validate-invoice.item,action-invoice-party-recalc,action-invoice-set-amount" />
 			<field name="reference" />
 			<field name="invoiceDateT" />
 			<field name="priority" />
-			<field name="party" onChange="action-invoice.party.set-values,action.invoicce-validate-invoice.item" />
+			<field name="party" onChange="action-invoice.party.set-values,action.invoicce-validate-invoice.item,action-invoice-party-recalc,action-invoice-set-amount" />
 			<field name="partyContact" />
 			<field name="invoiceAddress" />
 			<field name="shippingAddress" />
@@ -66,7 +65,11 @@
 				colSpan="12" />
 		</panel>
 	</form>
-
+	
+		<action-method name="action-invoice-party-recalc">
+		<call class="com.axelor.gst.db.web.GstController"
+			method="setvalidationParty" />
+	</action-method>
 
 	<action-attrs name="action-party-validation">
 		<attribute name="value" for="partyContact"

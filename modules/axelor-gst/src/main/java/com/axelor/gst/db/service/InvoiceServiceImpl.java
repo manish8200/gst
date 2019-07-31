@@ -81,11 +81,12 @@ public class InvoiceServiceImpl implements InvoiceService {
 		return inline;
 		}
 		else {
-			inline.setNetAmount(null);
-			inline.setSGST(null);
-			inline.setCGST(null);
-			inline.setIGST(null);
-			inline.setGrossAmount(null);
+			BigDecimal unknown = BigDecimal.ZERO;
+			inline.setNetAmount(unknown);
+			inline.setSGST(unknown);
+			inline.setCGST(unknown);
+			inline.setIGST(unknown);
+			inline.setGrossAmount(unknown);
 			
 		}
 		return inline;
@@ -130,8 +131,6 @@ public class InvoiceServiceImpl implements InvoiceService {
 			invoice.setShippingAddress(null);
 				return invoice;
 		}
-		
-		
 		}
 
 	@Override
