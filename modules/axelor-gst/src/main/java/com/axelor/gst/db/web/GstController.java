@@ -20,9 +20,9 @@ public class GstController extends JpaSupport {
 	@Inject
 	InvoiceService inservice;
 
-	public void setitem(ActionRequest rq, ActionResponse rsp) {
+	public void setitem(ActionRequest req, ActionResponse resp) {
 
-		Invoice_line inline = rq.getContext().asType(Invoice_line.class);
+		Invoice_line inline = req.getContext().asType(Invoice_line.class);
 		Product product = inline.getProducts();
 
 		
@@ -33,24 +33,24 @@ public class GstController extends JpaSupport {
 			code = product.getCode();
 			name = product.getName();
 			item = "[" + code + "]" + name;
-			rsp.setValue("item", item);
+			resp.setValue("item", item);
 
-			rsp.setValue("price", product.getCostPrice());
-			rsp.setValue("gstRate", product.getGstRate());
-			rsp.setValue("HSBN", product.getHSBN());
+			resp.setValue("price", product.getCostPrice());
+			resp.setValue("gstRate", product.getGstRate());
+			resp.setValue("HSBN", product.getHSBN());
 		}
 		else {
-			rsp.setValue("item", null);
-			rsp.setValue("price", null);
-			rsp.setValue("gstRate", null);
-			rsp.setValue("HSBN", null);
+			resp.setValue("item", null);
+			resp.setValue("price", null);
+			resp.setValue("gstRate", null);
+			resp.setValue("HSBN", null);
 		}
 		
 	}
 
-	public void setaddress(ActionRequest rq, ActionResponse rsp) {
+	public void setaddress(ActionRequest req, ActionResponse resp) {
 
-		Address address = rq.getContext().asType(Address.class);
+		Address address = req.getContext().asType(Address.class);
 
 		String line1, fulladdress,line2;
 		String state;
@@ -60,19 +60,19 @@ public class GstController extends JpaSupport {
 		city = address.getCity().getName();
 		state = address.getState().getName();
 		fulladdress = line1 + line2 + " " + city + " " + state;
-		rsp.setValue("fullAddresss", fulladdress);
+		resp.setValue("fullAddresss", fulladdress);
 	}
 
-	public void setInvoice_as_shipping(ActionRequest rq, ActionResponse rsp) {
+	public void setInvoice_as_shipping(ActionRequest req, ActionResponse resp) {
 
-		Invoice invoice = rq.getContext().asType(Invoice.class);
+		Invoice invoice = req.getContext().asType(Invoice.class);
 		Address address = inservice.setinvoiceasship(invoice);
-		rsp.setValue("shippingAddress", address);
+		resp.setValue("shippingAddress", address);
 	}
 
-	public void setInvoiceAmount(ActionRequest rq, ActionResponse rsp) {
+	public void setInvoiceAmount(ActionRequest req, ActionResponse resp) {
 
-		Invoice invoice = rq.getContext().asType(Invoice.class);
+		Invoice invoice = req.getContext().asType(Invoice.class);
 		BigDecimal netamount = BigDecimal.ZERO;
 		BigDecimal netIgst = BigDecimal.ZERO, netCgst = BigDecimal.ZERO, netSgst= BigDecimal.ZERO, grossAmount = BigDecimal.ZERO;
 		
@@ -85,43 +85,43 @@ public class GstController extends JpaSupport {
 			grossAmount = grossAmount.add(invoice_line.getGrossAmount());
 			
 			// System.out.println(netIgst);
-			rsp.setValue("netAmount", netamount);
-			rsp.setValue("netIGST", netIgst);
-			rsp.setValue("netCSGT", netCgst);
-			rsp.setValue("netSGST", netSgst);
-			rsp.setValue("grossAmount", grossAmount);
+			resp.setValue("netAmount", netamount);
+			resp.setValue("netIGST", netIgst);
+			resp.setValue("netCSGT", netCgst);
+			resp.setValue("netSGST", netSgst);
+			resp.setValue("grossAmount", grossAmount);
 		}
 	}
 
-	public void setValidation(ActionRequest rq, ActionResponse rsp) {
-		Invoice_line inline = rq.getContext().asType(Invoice_line.class);
-		Invoice invoice = rq.getContext().getParent().asType(Invoice.class);
+	public void setValidation(ActionRequest req, ActionResponse resp) {
+		Invoice_line inline = req.getContext().asType(Invoice_line.class);
+		Invoice invoice = req.getContext().getParent().asType(Invoice.class);
 		Invoice_line invoice_line = inservice.validateaddress(invoice, inline);
 		System.out.println(invoice_line);
-		rsp.setValue("netAmount", invoice_line.getNetAmount());
-		rsp.setValue("IGST", invoice_line.getIGST());
-		rsp.setValue("SGST", invoice_line.getSGST());
-		rsp.setValue("CGST", invoice_line.getCGST());
-		rsp.setValue("grossAmount", invoice_line.getGrossAmount());
+		resp.setValue("netAmount", invoice_line.getNetAmount());
+		resp.setValue("IGST", invoice_line.getIGST());
+		resp.setValue("SGST", invoice_line.getSGST());
+		resp.setValue("CGST", invoice_line.getCGST());
+		resp.setValue("grossAmount", invoice_line.getGrossAmount());
 
 	}
 			
-	public void setparty(ActionRequest rq , ActionResponse rsp) {
-		//Party party = rq.getContext().asType(Party.class);
-		Invoice invoice = rq.getContext().asType(Invoice.class);
+	public void setparty(ActionRequest req , ActionResponse resp) {
+		//Party party = req.getContext().asType(Party.class);
+		Invoice invoice = req.getContext().asType(Invoice.class);
 		Invoice partyInvoice = inservice.validateParty(invoice);
 		System.out.println(partyInvoice);
-		rsp.setValue("partyContact", partyInvoice.getPartyContact());
-		rsp.setValue("invoiceAddress", partyInvoice.getInvoiceAddress());
-		rsp.setValue("shippingAddress", partyInvoice.getShippingAddress());
+		resp.setValue("partyContact", partyInvoice.getPartyContact());
+		resp.setValue("invoiceAddress", partyInvoice.getInvoiceAddress());
+		resp.setValue("shippingAddress", partyInvoice.getShippingAddress());
 	}
-	public void setvalidationParty(ActionRequest rq, ActionResponse rsp) {
-		Invoice invoice = rq.getContext().asType(Invoice.class);
+	public void setvalidationParty(ActionRequest req, ActionResponse resp) {
+		Invoice invoice = req.getContext().asType(Invoice.class);
 		List<Invoice_line> inline = invoice.getInvoiceItems();
 		for (Invoice_line invoice_line : inline) {
 			Invoice_line invoices = inservice.validateaddress(invoice,invoice_line);
 		}
-		rsp.setValues(invoice);
+		resp.setValues(invoice);
 		
 		
 	}

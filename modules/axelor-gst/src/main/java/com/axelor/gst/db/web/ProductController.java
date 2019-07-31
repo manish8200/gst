@@ -16,10 +16,10 @@ public class ProductController extends JpaSupport {
 
 	
 	@Transactional
-	public void getproductInvoiceItem(ActionRequest rq, ActionResponse rsp) {
+	public void getproductInvoiceItem(ActionRequest req, ActionResponse resp) {
 		
 		List<Invoice_line> inlinelist = new ArrayList<Invoice_line>();
-		List<Integer> productIds = (List<Integer>) rq.getContext().get("productId");
+		List<Integer> productIds = (List<Integer>) req.getContext().get("productId");
 		
 		List<Product> productList = Beans.get(ProductRepository.class).all().filter("self.id in (?1)", productIds).fetch();
 		for (Product product2 : productList) {
@@ -32,6 +32,6 @@ public class ProductController extends JpaSupport {
 			inline.setHSBN(product2.getHSBN());
 		inlinelist.add(inline);
 		}
-		rsp.setValue("invoiceItems",inlinelist);
+		resp.setValue("invoiceItems",inlinelist);
 	}
 }

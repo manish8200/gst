@@ -128,7 +128,7 @@
 	</action-attrs>
 
 <action-method name="action-set-seq">
-<call class="com.axelor.gst.db.web.SequenceController" method="setsequence"/>
+<call class="com.axelor.gst.db.web.SequenceController" method="incrementseq"/>
 </action-method>
 
 </object-views>

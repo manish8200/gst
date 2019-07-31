@@ -135,11 +135,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
 	@Override
 	public Invoice setinvoiceitem(Invoice invoice) {
-		// TODO Auto-generated method stub
-		List<Invoice_line> inline = invoice.getInvoiceItems();
-		for (Invoice_line invoice_line : inline) {
-			
-		}
+		
 		return null;
 	}
 }

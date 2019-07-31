@@ -4,6 +4,7 @@ import com.axelor.gst.db.Sequence;
 
 public interface Sequenceservice {
 
-	String setseq(Sequence sequence);
+	Sequence setseq(Sequence sequence);
 	
+	Sequence increasesequence(Sequence sequence);
 }
