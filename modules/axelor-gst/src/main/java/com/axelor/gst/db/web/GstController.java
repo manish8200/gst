@@ -3,6 +3,8 @@ package com.axelor.gst.db.web;
 import java.math.BigDecimal;
 import java.util.Collection;
 
+import org.quartz.simpl.ZeroSizeThreadPool;
+
 import com.axelor.db.JpaSupport;
 import com.axelor.gst.db.Address;
 import com.axelor.gst.db.Contact;
@@ -71,16 +73,16 @@ public class GstController extends JpaSupport {
 	public void setInvoiceAmount(ActionRequest rq, ActionResponse rsp) {
 
 		Invoice invoice = rq.getContext().asType(Invoice.class);
-		BigDecimal netamount;
-		BigDecimal netIgst, netCgst, netSgst, grossAmount;
+		BigDecimal netamount = BigDecimal.ZERO;
+		BigDecimal netIgst = BigDecimal.ZERO, netCgst = BigDecimal.ZERO, netSgst= BigDecimal.ZERO, grossAmount = BigDecimal.ZERO;
 		
 		Collection<Invoice_line> inline = invoice.getInvoiceItems();
 		for (Invoice_line invoice_line : inline) {
-			netamount = invoice_line.getNetAmount();
-			netIgst = invoice_line.getIGST();
-			netCgst = invoice_line.getCGST();
-			netSgst = invoice_line.getSGST();
-			grossAmount = invoice_line.getGrossAmount();
+		 netamount= netamount.add(invoice_line.getNetAmount());
+			netIgst = netIgst.add(invoice_line.getIGST());
+			netCgst = netCgst.add(invoice_line.getCGST());
+			netSgst = netSgst.add(invoice_line.getSGST());
+			grossAmount = grossAmount.add(invoice_line.getGrossAmount());
 			
 			// System.out.println(netIgst);
 			rsp.setValue("netAmount", netamount);

@@ -9,7 +9,7 @@
 		<many-to-one name="products" ref="Product" />
 		<string name="HSBN" required="true" />
 		<string name="item" required="true" />
-		<integer name="qty"></integer>
+		<integer name="qty" default="1"></integer>
 		<decimal name="price" default="1.00" />
 		<decimal name="netAmount" readonly="true" />
 		<decimal name="gstRate" readonly="true" />
