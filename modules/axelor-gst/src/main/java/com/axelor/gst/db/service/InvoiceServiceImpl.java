@@ -25,7 +25,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 		Boolean myaddress;
 		myaddress = shipping.getUseInvoiceAddress();
 
-		List<Address> partyAddress = party.getAddress();
+		List<Address> partyAddress = party.getAddressList();
 
 		Address inaddress;
 		Address useaddress = null;
@@ -50,8 +50,10 @@ public class InvoiceServiceImpl implements InvoiceService {
 	public Invoice_line validateaddress(Invoice invoice, Invoice_line inline) {
 		// TODO Auto-generated method stub
 		Party party = invoice.getParty();
-	
-		if(party != null) {
+		Address invoiceaddress= invoice.getInvoiceAddress();
+		Address shippingaddress = invoice.getShippingAddress();
+		
+		if(party != null && invoiceaddress != null && shippingaddress !=null ) {
 		Address addresses = invoice.getInvoiceAddress();
 		State states = addresses.getState();
 		Company company = invoice.getCompanies();
@@ -102,7 +104,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 		
 		if(party != null) {
 		
-		Collection<Contact>partycontacts = party.getContact();
+		Collection<Contact>partycontacts = party.getContactList();
 		for (Contact contact : partycontacts) {
 			if(contact.getType().equals("primary")) {
 				contacts = contact;
@@ -111,7 +113,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 		Address invoiceaddreess = null;
 		Address shippingaddress = null;
 		
-		Collection<Address>partyaddress = party.getAddress();
+		Collection<Address>partyaddress = party.getAddressList();
 		for (Address address : partyaddress) {
 			if(address.getType().equals("invoice")) {
 				invoiceaddreess = address;
@@ -138,4 +140,50 @@ public class InvoiceServiceImpl implements InvoiceService {
 		
 		return null;
 	}
+
+
+	@Override
+	public Invoice_line validateinvoice(Invoice invoice, Invoice_line inline) {
+		// TODO Auto-generated method stub
+		Address invoiceaddress = invoice.getInvoiceAddress();
+		if(invoiceaddress != null ) {
+			Address addresses = invoice.getInvoiceAddress();
+			State states = addresses.getState();
+			Company company = invoice.getCompanies();
+			Address address = company.getAddress();
+			State addressstate = address.getState();
+			BigDecimal gst = null, Sgst = null, Igst = null, netamount, price = null, gstRate, grossamount;
+			Integer qty = null;
+			int divide = 2;
+			gst = inline.getGstRate();
+			qty = inline.getQty();
+			price = inline.getPrice();
+			netamount = price.multiply(new BigDecimal(qty));
+			gstRate = gst.divide(new BigDecimal(divide));
+
+			if (addressstate.equals(states)) {
+				Sgst = netamount.multiply(gstRate);
+				grossamount = netamount.add(Sgst);
+			} else {
+				Igst = netamount.multiply(gst);
+				grossamount = netamount.add(Igst);
+			}
+			inline.setNetAmount(netamount);
+			inline.setSGST(Sgst);
+			inline.setCGST(Sgst);
+			inline.setIGST(Igst);
+			inline.setGrossAmount(grossamount);
+			return inline;
+			}
+			else {
+				BigDecimal unknown = BigDecimal.ZERO;
+				inline.setNetAmount(unknown);
+				inline.setSGST(unknown);
+				inline.setCGST(unknown);
+				inline.setIGST(unknown);
+				inline.setGrossAmount(unknown);
+				
+			}
+			return inline;
+		}
 }

@@ -34,7 +34,7 @@
 	</selection>
 
 	<form model="com.axelor.gst.db.Party" title="Party"
-		name="party-form" width="large">
+		name="party-form" width="large" onSave="action-party-set-reference">
 		<panel title="Party Details">
 			<field name="referenece" />
 			<field name="name" />
@@ -44,7 +44,7 @@
 			<field name="GSTIN" />
 		</panel>
 		<panel>
-			<field name="contact" css="panel-red">
+			<field name="contactList" css="panel-red">
 				<editor layout="table" x-show-titles="false">
 					<field name="name" colSpan="5" />
 					<field name="type" selection="contacts.type" colSpan="5" />
@@ -55,7 +55,7 @@
 				</editor>
 			</field>
 			<panel>
-				<field name="address" css="panel-blue">
+				<field name="addressList" css="panel-blue">
 					<editor layout="table" x-show-titles="false">
 						<field name="type" selection="addresss.type" colSpan="3"  />
 						<field name="fullAddresss" colSpan="4" onChange="action-set-fulladdress" />
@@ -70,6 +70,10 @@
 			</panel>
 		</panel>
 	</form>
+	
+	<action-method name="action-party-set-reference">
+	<call class="com.axelor.gst.db.web.SequenceController" method="setpartyref"/>
+	</action-method>
 
 
 	<action-method name="action-set-fulladdress">

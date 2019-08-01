@@ -77,15 +77,21 @@ model="com.axelor.gst.db.Sequence" >
 		<view type="form" name="invoice-form" />
 	</action-view>
 
-	<menuitem title="Draft_invoice" name="menu-draft"
+	<menuitem title="Draft Invoice" name="menu-draft"
 		parent="menu-invoice" action="draft.all" />
 	<action-view name="draft.all" title="draft invoice"
 		model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
 		<view type="form" name="invoice-form" />
-
 	</action-view>
-
+	
+	<!-- <menuitem title="Validated invoices" name="menu-validated-invoices"
+	parent="menu-invoice" action="validate.invoice"/> -->
+<!-- 	<action-view name="validate.invoice" title="validate invoice"
+	model="com.axelor.gst.db.Invoice">
+	
+	</action-view> -->
+	
 	<menuitem title="Configuration" name="menu-configuation"
 		parent="menu-party" />
 

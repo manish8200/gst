@@ -12,6 +12,7 @@ public interface InvoiceService {
 	Address setinvoiceasship(Invoice shipping);
 
 	Invoice_line validateaddress(Invoice invoice, Invoice_line inline);
+	Invoice_line validateinvoice(Invoice invoice , Invoice_line inline);
 	
 	Invoice validateParty(Invoice invoice);
 	

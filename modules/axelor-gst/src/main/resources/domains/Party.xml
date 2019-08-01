@@ -12,8 +12,8 @@
 		<boolean name="customer" />
 		<boolean name="supplier" />
 		<string name="GSTIN" min="15" max="15" />
-		<one-to-many name="contact" ref="Contact" />
-		<one-to-many name="address" ref="Address" />
+		<one-to-many name="contactList" ref="Contact" mappedBy="party" />
+		<one-to-many name="addressList" ref="Address" mappedBy="party" />
 
 	</entity>
 </domain-models>

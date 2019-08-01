@@ -122,8 +122,6 @@ public class GstController extends JpaSupport {
 			Invoice_line invoices = inservice.validateaddress(invoice,invoice_line);
 		}
 		resp.setValues(invoice);
-		
-		
+	}
 	}
 	
-}

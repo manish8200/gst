@@ -1,5 +1,6 @@
 package com.axelor.gst.db.service;
 
+import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.Sequence;
 
 public interface Sequenceservice {

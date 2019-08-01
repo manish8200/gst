@@ -24,7 +24,7 @@
 </panel>
 </form>
 <action-method name="action-seq">
-<call class="com.axelor.gst.db.web.SequenceController" method="incrementseq"/>
+<call class="com.axelor.gst.db.web.SequenceController" method="setrefernce"/>
 </action-method>
 
 <action-method name="action-set-next-number">
