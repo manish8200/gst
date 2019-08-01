@@ -109,6 +109,7 @@ public class GstController extends JpaSupport {
 	public void setparty(ActionRequest req , ActionResponse resp) {
 		//Party party = req.getContext().asType(Party.class);
 		Invoice invoice = req.getContext().asType(Invoice.class);
+		System.err.println(invoice.getParty());
 		Invoice partyInvoice = inservice.validateParty(invoice);
 		System.out.println(partyInvoice);
 		resp.setValue("partyContact", partyInvoice.getPartyContact());

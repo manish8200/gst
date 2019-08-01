@@ -50,10 +50,10 @@ public class InvoiceServiceImpl implements InvoiceService {
 	public Invoice_line validateaddress(Invoice invoice, Invoice_line inline) {
 		// TODO Auto-generated method stub
 		Party party = invoice.getParty();
+		Company invoicecompany = invoice.getCompanies();
 		Address invoiceaddress= invoice.getInvoiceAddress();
-		Address shippingaddress = invoice.getShippingAddress();
 		
-		if(party != null && invoiceaddress != null && shippingaddress !=null ) {
+		if(party != null && invoiceaddress != null && invoicecompany !=null ) {
 		Address addresses = invoice.getInvoiceAddress();
 		State states = addresses.getState();
 		Company company = invoice.getCompanies();

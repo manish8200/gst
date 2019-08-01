@@ -83,14 +83,54 @@ model="com.axelor.gst.db.Sequence" >
 		model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
 		<view type="form" name="invoice-form" />
+		<domain>self.status= 'draft'</domain>
+		<context name="status" expr="draft"/>
 	</action-view>
 	
-	<!-- <menuitem title="Validated invoices" name="menu-validated-invoices"
-	parent="menu-invoice" action="validate.invoice"/> -->
-<!-- 	<action-view name="validate.invoice" title="validate invoice"
+	 <menuitem title="Validated invoices" name="menu-validated-invoices"
+	parent="menu-invoice" action="validate.invoice"/> 
+	 	<action-view name="validate.invoice" title="validate invoice"
 	model="com.axelor.gst.db.Invoice">
+	<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
+		<domain>self.status= 'validate'</domain>
+		<context name="status" expr="validate"/>
+	</action-view> 
 	
-	</action-view> -->
+	
+	
+	 <menuitem title="Paid invoices" name="menu-paid-invoices"
+	parent="menu-invoice" action="paid.invoice"/> 
+	 	<action-view name="paid.invoice" title="paid invoice"
+	model="com.axelor.gst.db.Invoice">
+	<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
+		<domain>self.status= 'paid'</domain>
+		<context name="status" expr="paid"/>
+	</action-view> 
+
+	
+	
+	
+	 <menuitem title="Cancelled invoices" name="menu-canceled-invoices"
+	parent="menu-invoice" action="cancel.invoice"/> 
+	 	<action-view name="cancel.invoice" title="cancel invoice"
+	model="com.axelor.gst.db.Invoice">
+	<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
+		<domain>self.status= 'cancel'</domain>
+		<context name="status" expr="cancel"/>
+	</action-view> 
+	
+	 <menuitem title="All invoices" name="menu-all-invoices"
+	parent="menu-invoice" action="all.invoice"/> 
+	 	<action-view name="all.invoice" title="all invoice"
+	model="com.axelor.gst.db.Invoice">
+	<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
+	</action-view> 
+	
+	
 	
 	<menuitem title="Configuration" name="menu-configuation"
 		parent="menu-party" />
