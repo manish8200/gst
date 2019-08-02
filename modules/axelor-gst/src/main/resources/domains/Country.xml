@@ -6,7 +6,7 @@
 
 	<module package="com.axelor.gst.db" name="gst" />
 	<entity name="Country" cacheable="true">
-		<string name="name" required="true" />
+		<string name="name" title="Country Name" required="true" />
 	</entity>
 
 </domain-models>

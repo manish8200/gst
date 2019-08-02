@@ -6,13 +6,19 @@
 
 	<module package="com.axelor.gst.db" name="gst" />
 	<entity name="Address" cacheable="true">
-		<string name="type" required="true" />
-		<string name="fullAddresss" namecolumn="true" />
-		<string name="line1" required="true" />
-		<string name="line2" />
-		<many-to-one name="city" ref="City" required="true" />
-		<many-to-one name="state" ref="State" />
-		<many-to-one name="country" ref="Country" required="true" />
+		<string name="type"   title="Address Type"  required="true" />
+		<string name="fullAddresss" title="Full Address" namecolumn="true" search="line1,city,state,country" >
+		<![CDATA[
+		if ( line1 == null && city.getName() == null && state.getName() == null && country.getName() == null)
+		return null;
+		else
+		return line1 + " " + city.getName() + " " +  state.getName() + " " + country.getName();
+		]]></string>
+		<string name="line1" title="Line1 Address" required="true" />
+		<string name="line2" title="Line2 Adress" />
+		<many-to-one name="city" title="City" ref="City" required="true" />
+		<many-to-one name="state" title="State" ref="State" />
+		<many-to-one name="country" title="Country" ref="Country" required="true" />
 		<string name="pincode" />
 		<many-to-one name="party" ref="com.axelor.gst.db.Party"/>
 	</entity>

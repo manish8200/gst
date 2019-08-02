@@ -8,13 +8,13 @@
 
 	<entity name="Company" cacheable="true">
 
-		<string name="name" namecolumn="true" required="true" />
-		<many-to-one name="logo" ref="com.axelor.meta.db.MetaFile" />
+		<string name="name" title="Company Name" namecolumn="true" required="true" />
+		<many-to-one name="logo" title="Company Logo" ref="com.axelor.meta.db.MetaFile" />
 
-		<one-to-many name="contact" ref="Contact" />
+		<one-to-many name="contact" title="Company Contact" ref="Contact" />
 		<string name="GSTIN" />
-		<one-to-many name="bankDetails" ref="BankAccount" />
-		<many-to-one name="address" ref="Address"></many-to-one>
+		<one-to-many name="bankDetails" title="Company Bank Account" ref="BankAccount" />
+		<many-to-one name="address" title="Company Address" ref="Address"></many-to-one>
 	</entity>
 
 

@@ -25,7 +25,7 @@
 		name="address-form" onSave="address-validation">
 		<panel title="Address">
 			<field name="type" selection="address.type" />
-			<field name="fullAddresss" onChange="action-set-fulladdress" />
+			<field name="fullAddresss"  />
 			<field name="line1" />
 			<field name="line2" />
 			<field name="city" />
@@ -34,14 +34,5 @@
 			<field name="pincode" />
 		</panel>
 	</form>
-
-	<action-method name="action-set-fulladdress">
-		<call class="com.axelor.gst.db.web.GstController"
-			method="setaddress" />
-	</action-method>
-
-	<action-validate name="address-validation">
-		<error message="fullAddress is null " if="fullAddresss == null" />
-	</action-validate>
 
 </object-views>

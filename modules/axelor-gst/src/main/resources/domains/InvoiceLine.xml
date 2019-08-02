@@ -5,7 +5,7 @@
   http://axelor.com/xml/ns/domain-models/domain-models_5.1.xsd">
 
 	<module package="com.axelor.gst.db" name="gst" />
-	<entity name="Invoice_line" cacheable="true">
+	<entity name="InvoiceLine" cacheable="true">
 		<many-to-one name="products" ref="Product" />
 		<string name="HSBN" required="true" />
 		<string name="item" required="true" />

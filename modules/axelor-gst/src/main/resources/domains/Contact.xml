@@ -6,13 +6,13 @@
 
 	<module package="com.axelor.gst.db" name="gst" />
 	<entity name="Contact">
-		<string name="name" required="true" />
-		<string name="type" required="true" />
-		<string name="primaryEmail" />
-		<string name="secondaryEmail" />
-		<string name="primaryPhone" />
-		<string name="secondaryPhone" />
-<many-to-one name="party" ref="com.axelor.gst.db.Party"/>
+		<string name="name" title="Contact Name" required="true" />
+		<string name="type" title="Contact Type" required="true" />
+		<string name="primaryEmail" title="Contact Primary Email" />
+		<string name="secondaryEmail" title="Contact Secondary Email" />
+		<string name="primaryPhone" title="Contact Primary Phone number" />
+		<string name="secondaryPhone" title="Contact Secondary number"/>
+<many-to-one name="party" title="Party Contact" ref="com.axelor.gst.db.Party"/>
 
 	</entity>
 

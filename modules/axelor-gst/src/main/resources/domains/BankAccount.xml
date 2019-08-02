@@ -6,11 +6,11 @@
 
 	<module package="com.axelor.gst.db" name="gst" />
 	<entity name="BankAccount" cacheable="true">
-		<string name="bank" required="true" />
-		<string name="accountNo" namecolumn="true" required="true" />
-		<string name="IFSC" required="true" />
-		<string name="type" default="current" />
-		<many-to-one name="address" ref="Address" />
+		<string name="bank" title="BankName" required="true" />
+		<string name="accountNo" title="AccountNumber" namecolumn="true" required="true" />
+		<string name="IFSC" title="IFSC Code" required="true" />
+		<string name="type" title="AccountType" default="current" />
+		<many-to-one name="address" title="Address" ref="Address" />
 	</entity>
 
 

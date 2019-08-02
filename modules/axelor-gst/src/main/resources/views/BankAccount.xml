@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
 
 	<selection name="selection.type">
-		<option value="saving">SAving</option>
+		<option value="saving">Saving</option>
 		<option value="current">Current</option>
 	</selection>
 
