@@ -36,6 +36,12 @@
 		name="invoice-form" width="large"
 		onNew="action-invoice-statusButton-hide,action-invoice-set-dateCompanyInvoiceLine-validation-Product-Invoice-generate"
 		onSave="action-invoice-set-refernece">
+		
+		 <toolbar>
+ <button name="Create Product Invoice" title="Create invoice" onClick="set-product-invoice" />
+ <button name="print" title="print invoice" onClick="action-print-invoice"/>
+ </toolbar>
+ 
 		<panel title="Invoice" css="panel-red">
 			<field name="status" selection="status-selection"
 				widget="NavSelect" colSpan="8" />
@@ -75,6 +81,10 @@
 				colSpan="12" />
 		</panel>
 	</form>
+	
+	<action-report output="pdf" name="action-print-invoice" design="Invoice.rptdesign">
+	<param name="param" expr="eval:id"/>
+	</action-report>
 
 	<action-attrs name="action-invoice-statusButton-hide">
 	<attribute name="hidden" for="StatusButton" expr="eval: invoiceItems == null "/>
@@ -154,7 +164,7 @@
 
 	<action-method name="action-invoice-set-refernece">
 		<call class="com.axelor.gst.db.web.SequenceController"
-			method="incrementseq" />
+			method="setrefernce" />
 	</action-method>
 
 </object-views>

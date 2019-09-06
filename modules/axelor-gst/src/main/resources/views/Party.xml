@@ -71,6 +71,21 @@
 		</panel>
 	</form>
 	
+	<cards name="Party-card-view" model="com.axelor.gst.db.Party" title="Party.card">
+	<field name="name"/>
+	<field name="customer"/>
+	<field name="address"/>
+	<template>
+	<![CDATA[
+	<div class="span8"
+	<address>
+		<strong>{{address.fullAddress}}</strong><br>
+	<address>	
+	</div>
+	]]>
+	</template>
+	</cards>
+	
 	<action-method name="action-party-set-reference">
 	<call class="com.axelor.gst.db.web.SequenceController" method="setpartyref"/>
 	</action-method>

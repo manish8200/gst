@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+<chart name="chart.customer.per.state" title="Customer per State">
+<dataset type="sql">
+	<![CDATA[
+select Count( party.name) as count,address.state as state  from gst_address address inner join gst_party party on party.id=address.party group by address.state;
+
+	 	]]>
+   	</dataset>
+<category key="count" />
+<series key="state" type="pie" />
+	
+</chart>
+
+<chart name="chat.unpaid.invoice" title="unpaid invoice">
+<dataset type="sql">
+<![CDATA[
+
+select Count(party.name) as name, invoice.id as invoice from gst_invoice invoice inner join gst_party party on party.id=invoice.id group by invoice.id ;
+
+]]>
+</dataset>
+<category key="name"/>
+<series key="invoice" type="bar"/>
+
+</chart>
+		
+	</object-views>

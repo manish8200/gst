@@ -3,6 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
 
+
+<menuitem title="Dashboard" name="dashboard-chart" action="dashboard.show"/>
+<action-view name="dashboard.show" title="PieChart">
+<view type="dashboard" name="Welcome.dashbord"/>
+<domain>self.status= 'paid'</domain>
+<context name="status" expr="paid"/>
+</action-view>
+
+
 	<menuitem title="Company" name="menu-company" />
 
 	<menuitem title="All Companies" name="menu-companies-all"
@@ -39,14 +48,17 @@ model="com.axelor.gst.db.Sequence" >
 		model="com.axelor.gst.db.Party">
 		<view type="grid" name="party-grid" />
 		<view type="form" name="party-form" />
+			<view type="cards" name="Party-card-view"/>
 	</action-view>
 
 	<menuitem title="All Contacts" name="menu-contacts"
 		parent="menu-party" action="contact.all" />
 	<action-view name="contact.all" title="Contacts"
 		model="com.axelor.gst.db.Contact">
+		
 		<view type="grid" name="contact-grid" />
 		<view type="form" name="contact-form" />
+	
 	</action-view>
 
 
