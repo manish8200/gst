@@ -1,11 +1,13 @@
 package com.axelor.gst.db.web;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import com.axelor.db.JpaSupport;
 import com.axelor.gst.db.Address;
+import com.axelor.gst.db.Company;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Product;
@@ -58,8 +60,12 @@ public class InvoiceController extends JpaSupport {
 		BigDecimal netamount = BigDecimal.ZERO;
 		BigDecimal netIgst = BigDecimal.ZERO, netCgst = BigDecimal.ZERO, netSgst = BigDecimal.ZERO,
 				grossAmount = BigDecimal.ZERO;
-
+		
+		Company	invoiceComapny = invoice.getCompanies() ;
+		
 		Collection<InvoiceLine> inline = invoice.getInvoiceItems();
+		if(invoiceComapny != null && invoice.getParty() != null && inline != null) {
+		
 		for (InvoiceLine InvoiceLine : inline) {
 			netamount = netamount.add(InvoiceLine.getNetAmount());
 			netIgst = netIgst.add(InvoiceLine.getIGST());
@@ -76,6 +82,14 @@ public class InvoiceController extends JpaSupport {
 		resp.setValue("netSGST", netSgst);
 		resp.setValue("grossAmount", grossAmount);
 	}
+	else {
+		resp.setValue("netAmount", BigDecimal.ZERO);
+		resp.setValue("netIGST", BigDecimal.ZERO);
+		resp.setValue("netSGST", BigDecimal.ZERO);
+		resp.setValue("netCSGT", BigDecimal.ZERO);
+		resp.setValue("grossAmount", BigDecimal.ZERO);
+	}	
+	}
 
 	public void setValidationInvoiceLine(ActionRequest req, ActionResponse resp) {
 		InvoiceLine inline = req.getContext().asType(InvoiceLine.class);
@@ -89,6 +103,7 @@ public class InvoiceController extends JpaSupport {
 		resp.setValue("grossAmount", InvoiceLine.getGrossAmount());
 
 	}
+	
 
 	public void setparty(ActionRequest req, ActionResponse resp) {
 		// Party party = req.getContext().asType(Party.class);
@@ -102,29 +117,27 @@ public class InvoiceController extends JpaSupport {
 	}
 
 	public void setvalidationParty(ActionRequest req, ActionResponse resp) {
+	
 		Invoice invoice = req.getContext().asType(Invoice.class);
-		List<InvoiceLine> inlineList = invoice.getInvoiceItems();
-		BigDecimal netamount = null,Igst = null,Cgst = null,Sgst = null,grossamount = null;
 		
+		List<InvoiceLine> inlineList = invoice.getInvoiceItems();
+		List<InvoiceLine> invoiceline = new ArrayList<InvoiceLine>();
+
+		if(inlineList != null) {
 		for (InvoiceLine InvoiceLine : inlineList) {
-			InvoiceLine invoices = inservice.validateaddress(invoice, InvoiceLine);
-			 netamount = invoices.getNetAmount();
-			 Igst = invoices.getIGST();
-			 Cgst = invoices.getCGST();
-			 Sgst = invoices.getSGST();
-			 grossamount = invoices.getGrossAmount();
-			invoice.setNetAmount(netamount);	
-			invoice.setGrossAmount(grossamount);
-			invoice.setNetCSGT(Cgst);
-			invoice.setNetIGST(Igst);
-			invoice.setNetSGST(Sgst);
+		InvoiceLine invoices = inservice.validateaddress(invoice, InvoiceLine);
+			invoiceline.add(invoices);
 		}
-		resp.setValue("netAmount", netamount);
-		resp.setValue("IGST", Igst);
-		resp.setValue("SGST", Sgst);
-		resp.setValue("CGST", Cgst);
-		resp.setValue("grossAmount", grossamount);
+		invoice.setInvoiceItems(invoiceline);
+		}else {
+			invoice.setInvoiceItems(null);
 		}
+		resp.setValues(invoice);
+	
+		}
+	
+	
+	 {
 		
 	}
-
+}

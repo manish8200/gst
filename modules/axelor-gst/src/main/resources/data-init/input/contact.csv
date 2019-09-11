@@ -1,1 +1,2 @@
-"name","primaryEmail","secondaryEmail","primaryPhone","secondaryPhone"
+name,type,primaryEmail,primaryPhone
+Demo Contact,primary,xyz@gmial.com,8745993248

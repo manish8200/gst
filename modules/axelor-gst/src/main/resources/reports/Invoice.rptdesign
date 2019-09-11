@@ -881,7 +881,6 @@ gst_invoice_line as inline
                 </structure>
                 <structure>
                     <property name="name">Aggregation</property>
-                    <text-property name="displayName">total qty</text-property>
                     <property name="dataType">float</property>
                     <property name="aggregateFunction">SUM</property>
                     <list-property name="arguments">
@@ -894,7 +893,6 @@ gst_invoice_line as inline
                 </structure>
                 <structure>
                     <property name="name">Aggregation_1</property>
-                    <text-property name="displayName">total price</text-property>
                     <property name="dataType">float</property>
                     <property name="aggregateFunction">SUM</property>
                     <list-property name="arguments">
@@ -906,14 +904,25 @@ gst_invoice_line as inline
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
+                    <property name="name">m</property>
+                    <property name="dataType">decimal</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["qty"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
                     <property name="name">Aggregation_2</property>
-                    <text-property name="displayName">total Igst</text-property>
                     <property name="dataType">float</property>
                     <property name="aggregateFunction">SUM</property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["igst"]</expression>
+                            <expression name="value" type="javascript">row["cgst"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -937,21 +946,15 @@ gst_invoice_line as inline
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["cgst"]</expression>
+                            <expression name="value" type="javascript">row["qty"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
-                    <property name="name">Aggregation_5</property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
-                    <list-property name="arguments">
-                        <structure>
-                            <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["gross_amount"]</expression>
-                        </structure>
-                    </list-property>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">BirtMath.add(dataSetRow["gross_amount"])</expression>
+                    <property name="dataType">string</property>
                     <property name="allowExport">true</property>
                 </structure>
             </list-property>
@@ -1092,36 +1095,9 @@ gst_invoice_line as inline
                     </cell>
                     <cell id="154">
                         <data id="196">
-                            <property name="resultSetColumn">Aggregation_5</property>
+                            <property name="resultSetColumn">Column Binding</property>
                         </data>
                     </cell>
-                </row>
-            </footer>
-        </table>
-        <table id="173">
-            <property name="marginTop">50pt</property>
-            <column id="186"/>
-            <column id="187"/>
-            <column id="188"/>
-            <header>
-                <row id="174">
-                    <cell id="175"/>
-                    <cell id="176"/>
-                    <cell id="177"/>
-                </row>
-            </header>
-            <detail>
-                <row id="178">
-                    <cell id="179"/>
-                    <cell id="180"/>
-                    <cell id="181"/>
-                </row>
-            </detail>
-            <footer>
-                <row id="182">
-                    <cell id="183"/>
-                    <cell id="184"/>
-                    <cell id="185"/>
                 </row>
             </footer>
         </table>

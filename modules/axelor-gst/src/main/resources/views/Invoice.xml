@@ -34,7 +34,7 @@
 
 	<form model="com.axelor.gst.db.Invoice" title="Invoice"
 		name="invoice-form" width="large"
-		onNew="action-invoice-statusButton-hide,action-invoice-set-dateCompanyInvoiceLine-validation-Product-Invoice-generate"
+		onNew="action-group-invoice-set-date-CompanyInvoiceLine-validation-Product-Invoice-generate"
 		onSave="action-invoice-set-refernece">
 		
 		 <toolbar>
@@ -60,13 +60,12 @@
 					showIf=" status == 'validate' " />
 			</button-group>
 			<field name="companies"
-				onChange="action-invoice-attrs-company-party-hide-invoiceline,action-invoice-party-recalc" />
+				onChange="action-invoice-attrs-company-party-hide-invoiceline,action-invoice-party-recalc,action-invoice-set-amount" />
 			<field name="reference" />
 			<field name="invoiceDateT" />
 			<field name="priority" />
 			<field name="party"
-				onChange="action-invoice-party-set-values,action-invoice-attrs-company-party-hide-invoiceline,action-invoice-party-recalc,
-			action-invoice-party-filter-patry-contact" />
+				onChange="action-invoice-party-set-values,action-invoice-attrs-company-party-hide-invoiceline,action-invoice-party-recalc,action-invoice-set-amount" />
 			<field name="partyContact" />
 			<field name="invoiceAddress"
 				onChange="action-invoice-party-recalc" />
@@ -82,29 +81,25 @@
 		</panel>
 	</form>
 	
-	<action-report output="pdf" name="action-print-invoice" design="Invoice.rptdesign">
-	<param name="param" expr="eval:id"/>
-	</action-report>
+	<!-- <action-method> -->  
+	
+		<action-method name="action-set-useasshipping">
+		<call class="com.axelor.gst.db.web.InvoiceController"
+			method="setInvoice_as_shipping" />
+	</action-method>
 
-	<action-attrs name="action-invoice-statusButton-hide">
-	<attribute name="hidden" for="StatusButton" expr="eval: invoiceItems == null "/>
-	</action-attrs>
-
-
-	<action-method name="action-invoice-set-reference">
+	<action-method name="action-invoice-set-amount">
+		<call class="com.axelor.gst.db.web.InvoiceController"
+			method="setInvoiceAmount" />
+	</action-method>
+	
+	
+	<action-method name="action-invoice-set-refernece">
 		<call class="com.axelor.gst.db.web.SequenceController"
 			method="setrefernce" />
 	</action-method>
-
-	<action-attrs name="action-invoice-party-filter-patry-contact">
-		<attribute name="domain" for="partyContact"
-			expr="eval: &quot;self.party= :party&quot;" />
-			<attribute name="domain" for="invoiceAddress" expr="eval: &quot;self.party= :party&quot;"/>
-			<attribute name="domain" for="shippingAddress" expr="eval: eval: &quot;self.party= :party&quot;"/>
-	</action-attrs>
 	
-
-	<action-method name="action-invoice-party-recalc">
+		<action-method name="action-invoice-party-recalc">
 		<call class="com.axelor.gst.db.web.InvoiceController"
 			method="setvalidationParty" />
 	</action-method>
@@ -114,18 +109,59 @@
 			method="setparty" />
 	</action-method>
 
-	<action-attrs name="action-invoice-attrs-company-party-hide-invoiceline">
-		<attribute name="readonly" for="invoiceItems"
-			expr="eval: companies == null || party == null " />
-			
-	</action-attrs>
-
 
 
 	<action-method name="action-product-getId-create-invoice">
 		<call class="com.axelor.gst.db.web.ProductController"
 			method="getproductInvoiceItem" />
 	</action-method>
+	
+	
+<!-- 	<action-attr> -->
+	<action-attrs name="action-button-status-cancel">
+		<attribute name="value" for="status" expr="cancel" />
+	</action-attrs>
+	
+	<action-attrs name="action-button-status-validate">
+		<attribute name="value" for="status" expr="validate" />
+	</action-attrs>
+	
+	<action-attrs name="action-button-status-paid">
+		<attribute name="value" for="status" expr="paid" />
+	</action-attrs>
+	
+	<action-attrs name="action-button-status-draft">
+		<attribute name="value" for="status" expr="draft" />
+	</action-attrs>
+
+	<action-attrs name="action-invoice-statusButton-hide">
+	<attribute name="hidden" for="StatusButton" expr="eval: invoiceItems == null "/>
+	</action-attrs>
+	
+		<action-attrs name="action-invoice-attrs-company-party-hide-invoiceline">
+		<attribute name="readonly" for="invoiceItems"
+			expr="eval: companies == null || party == null " />
+			
+	</action-attrs>
+
+		<action-attrs name="action-invoice-party-filter-patry-contact">
+		<attribute name="domain" for="partyContact"
+			expr="eval: &quot;self.party= :party&quot;" />
+			<attribute name="domain" for="invoiceAddress" expr="eval: &quot;self.party= :party&quot;"/>
+			<attribute name="domain" for="shippingAddress" expr="eval: eval: &quot;self.party= :party&quot;"/>
+	</action-attrs>
+	
+	<!-- </action-attr> -->
+	
+	
+<!-- <action-report --> 
+
+	<action-report output="pdf" name="action-print-invoice" design="Invoice.rptdesign">
+	<param name="param" expr="eval:id"/>
+	</action-report>
+
+<!-- </action-report> -->
+
 
 	<action-record name="action-invoice-onnew-dateAndCompany-set"
 		model="com.axelor.gst.db.Invoice">
@@ -133,38 +169,13 @@
 		<field name="companies" expr="eval: __repo__(Company).all().fetchOne()"/>
 	</action-record>
 
-	<action-method name="action-set-useasshipping">
-		<call class="com.axelor.gst.db.web.InvoiceController"
-			method="setInvoice_as_shipping" />
-	</action-method>
 
-	<action-method name="action-invoice-set-amount">
-		<call class="com.axelor.gst.db.web.InvoiceController"
-			method="setInvoiceAmount" />
-	</action-method>
 
-	<action-group name="action-invoice-set-date-CompanyInvoiceLine-validation-Product-Invoice-generate">
+	<action-group name="action-group-invoice-set-date-CompanyInvoiceLine-validation-Product-Invoice-generate">
+			<action name="action-invoice-statusButton-hide"/>
 		<action name="action-invoice-onnew-dateAndCompany-set" />
 		<action name="action-product-getId-create-invoice" />
-		<action name="action-invoice-attrs-company-party-hide-invoiceline" />
 	</action-group>
 
-	<action-attrs name="action-button-status-cancel">
-		<attribute name="value" for="status" expr="cancel" />
-	</action-attrs>
-	<action-attrs name="action-button-status-validate">
-		<attribute name="value" for="status" expr="validate" />
-	</action-attrs>
-	<action-attrs name="action-button-status-paid">
-		<attribute name="value" for="status" expr="paid" />
-	</action-attrs>
-	<action-attrs name="action-button-status-draft">
-		<attribute name="value" for="status" expr="draft" />
-	</action-attrs>
-
-	<action-method name="action-invoice-set-refernece">
-		<call class="com.axelor.gst.db.web.SequenceController"
-			method="setrefernce" />
-	</action-method>
 
 </object-views>

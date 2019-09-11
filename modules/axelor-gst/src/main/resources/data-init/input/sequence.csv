@@ -1,0 +1,3 @@
+prefix,suffix,padding,nextNumber,model.name
+PART,SEQ,2,PART01SEQ,Party
+INV,SEQ,2,INV01SEQ,Invoice

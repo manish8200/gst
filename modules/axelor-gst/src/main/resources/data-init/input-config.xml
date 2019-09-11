@@ -11,18 +11,19 @@
 	</input>
 
  	<input file="city.csv" separator=";" type="com.axelor.gst.db.City">
-<!--  	<bind to="name" column="name"></bind>
- -->	
 	</input>  
 	
-	<input file="Address.csv" type="com.axelor.gst.db.Address">
-	<bind to="fullAddresss" column="fullAddresss"></bind>
-	<bind to="line1"></bind>
-	<bind to="line2"></bind>
-	<bind to="city" column="city.name"></bind>
-	<bind to="state" column="state.name"></bind>
-	<bind to="country" column="country.name"></bind>
-	<bind to="pincode" column="pincode"></bind>
-	</input> 
-
+	<input file="contact.csv" type="com.axelor.gst.db.Contact"></input>
+	<input file="Address.csv" type="com.axelor.gst.db.Address"></input>
+	
+	<input file="company.csv" type="com.axelor.gst.db.Company"></input>  
+	
+	<input file="sequence.csv" type="com.axelor.gst.db.Sequence"></input>
+	
+	<input file="party.csv" type="com.axelor.gst.db.Party">
+	</input>
+	
+	<input file="productcategory.csv" type="com.axelor.gst.db.Product_Category"></input>
+	
+	<input file="Product.csv" type="com.axelor.gst.db.Product"></input>
 </csv-inputs>
